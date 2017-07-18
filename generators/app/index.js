@@ -17,6 +17,9 @@ module.exports = class extends Generator {
 				message: 'Would you like to include .eslintrc?'
 			}
 		]).then((responses) => {
+			this.mUser = {
+				name: responses.name
+			}
 			this.log('Name:', responses.name);
 			this.log('Include .eslintrc:', responses.lint);
 		});
@@ -31,7 +34,7 @@ module.exports = class extends Generator {
 		this.fs.copyTpl(
 			this.templatePath(sFilePath),
 			this.destinationPath(sFilePath),
-			{ title: 'Generated with Yeoman :)'}
+			{ title: this.mUser.name }
 		);
 		this.log('Copied ', sFilePath);
 	}
