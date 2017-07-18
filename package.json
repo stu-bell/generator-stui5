@@ -1,0 +1,12 @@
+{
+  "name": "generator-stui5",
+  "version": "0.1.0",
+  "description": "UI5 generator for me to learn about yeoman.",
+  "files": [
+    "generators"
+  ],
+  "keywords": ["yeoman-generator", "UI5"],
+  "dependencies": {
+    "yeoman-generator": "^1.0.0"
+  }
+}
