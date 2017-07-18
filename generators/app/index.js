@@ -29,7 +29,7 @@ module.exports = class extends Generator {
 				namespace: responses.namespace
 			};
 			// persist config
-			this.config.set('namespace', responses.namespace);
+			this.config.set(this.mUser);
 
 			// logs
 			this.log('Include .eslintrc:', responses.lint);
