@@ -6,7 +6,11 @@ module.exports = class extends Generator {
 		super(args, opts);
 
 		// add flags
-		this.option('lint'); 
+		this.option('lint');
+	}
+
+	method1() {
+		this.log('method1 just ran :D');
 	}
 
 };
