@@ -13,7 +13,7 @@
 			data-sap-ui-libs='sap.m'
 			data-sap-ui-xx-bindingSyntax="complex"
 			data-sap-ui-resourceroots='{
-				"scb.fleetman" : "./"
+			"<%= namespace %>" : "./"
 			}' >
 		</script>
 
@@ -21,7 +21,7 @@
 			new sap.m.Shell("Shell", {
 				title : "Products",
 				app : new sap.ui.core.ComponentContainer({
-					name : 'scb.fleetman' // make sure each instance of this is correctly changed to the new namespace
+					name : '<%= namespace %>'
 				})
 			}).placeAt('content');
 		</script>

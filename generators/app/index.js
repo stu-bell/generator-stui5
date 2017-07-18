@@ -45,7 +45,9 @@ module.exports = class extends Generator {
 		this.fs.copyTpl(
 			this.templatePath(sFilePath),
 			this.destinationPath(sFilePath),
-			{ title: this.mUser.name }
+			{ title: this.mUser.name,
+				namespace: this.mUser.namespace
+			}
 		);
 		this.log('Copied ', sFilePath);
 	}
