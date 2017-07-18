@@ -12,6 +12,12 @@ module.exports = class extends Generator {
 				default: this.appname //default to current folder name
 			},
 			{
+				type: 'input',
+				name: 'namespace',
+				message: 'What\'s your project namespace?',
+				default: 'scb.yeo' // TODO: rename to slug of project?
+			}
+			{
 				type: 'confirm',
 				name: 'lint',
 				message: 'Would you like to include .eslintrc?'
