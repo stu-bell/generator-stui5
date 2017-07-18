@@ -1,0 +1,77 @@
+{
+  "_version": "1.1.0",
+  "sap.app": {
+    "_version": "1.1.0",
+    "id": "scb.fleetman",
+    "type": "application",
+    "i18n": "i18n/messageBundle.properties",
+    "applicationVersion": {
+      "version": "1.1.0"
+    },
+    "offline": false
+  },
+  "sap.ui": {
+    "_version": "1.1.0",
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": false
+    },
+    "supportedThemes": [
+      "sap_bluecrystal"
+    ]
+  },
+  "sap.ui5": {
+    "_version": "1.1.0",
+    "rootView": "scb.fleetman.view.App",
+    "dependencies": {
+      "minUI5Version": "1.30",
+      "libs": {
+        "sap.m": {}
+      }
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/messageBundle.properties",
+        "preload": true
+      }
+    },
+    "resourceRoots": {
+      "scb.fleetman": "./"
+    },
+    "config": {
+      "resourceBundle": "i18n/messageBundle.properties"
+    },
+    "routing" : {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath" : "scb.fleetman.view",
+        "clearTarget" : false,
+        "controlId": "app",
+        "controlAggregation": "pages"
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "Blank",
+          "target": [
+            "Blank"
+          ]
+        }
+      ],
+      "targets": {
+        "Blank": {
+          "viewName": "Blank",
+          "viewLevel": 1
+        }
+      }
+    }
+  },
+  "sap.platform.hcp": {
+    "uri": "",
+    "_version": "1.1.0"
+  }
+}

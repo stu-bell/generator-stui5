@@ -1,13 +1,6 @@
 var Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
-	constructor(args, opts) {
-		// call super constructor
-		super(args, opts);
-
-		// add flags
-		this.option('lint');
-	}
 
 	prompting() {
 		// prompts returned as a promise
@@ -31,6 +24,16 @@ module.exports = class extends Generator {
 
 	method1() {
 		this.log('method1 just ran :D');
+	}
+
+	writing() {
+		var sFilePath = 'index.html';
+		this.fs.copyTpl(
+			this.templatePath(sFilePath),
+			this.destinationPath(sFilePath),
+			{ title: 'Generated with Yeoman :)'}
+		);
+		this.log('Copied ', sFilePath);
 	}
 
 };
