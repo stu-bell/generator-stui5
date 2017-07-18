@@ -15,18 +15,23 @@ module.exports = class extends Generator {
 				type: 'input',
 				name: 'namespace',
 				message: 'What\'s your project namespace?',
-				default: 'scb.yeo' // TODO: rename to slug of project?
-			}
+				default: 'scb.yeo' // TODO: rename to slug of project? R.slugify?
+			},
 			{
 				type: 'confirm',
 				name: 'lint',
 				message: 'Would you like to include .eslintrc?'
 			}
 		]).then((responses) => {
+			// save for runtime
 			this.mUser = {
-				name: responses.name
-			}
-			this.log('Name:', responses.name);
+				name: responses.name,
+				namespace: responses.namespace
+			};
+			// persist config
+			this.config.set('namespace', responses.namespace);
+
+			// logs
 			this.log('Include .eslintrc:', responses.lint);
 		});
 	}
