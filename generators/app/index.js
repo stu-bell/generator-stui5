@@ -36,7 +36,7 @@ module.exports = class extends Generator {
 		aPromptAlways = [
 			{
 				type: 'confirm',
-				name: 'proceed_yo_rc',
+				name: 'proceedWithConfig',
 				message: 'Are you happy to proceed with the exsitng yo-rc config?',
 			}
 		],
@@ -50,10 +50,10 @@ module.exports = class extends Generator {
 			this.config.set(responses);
 
 			// delete responses not needed for config
-			this.config.delete('proceed_yo_rc');
+			this.config.delete('proceedWithConfig');
 
 			// finish early if they want to edit the config
-			if (responses.proceed_yo_rc === false) {
+			if (responses.proceedWithConfig === false) {
 				this.log('Modify your .yo-rc.json config file then re-run the generator');
 				// TODO finish early - Do we really need this option at all?/
 			}
@@ -73,14 +73,20 @@ module.exports = class extends Generator {
 		this.log('Copied ', sFilePath);
 
 		// manifest.json
-		// TODO: check config for any overwritten properties that are to be merged into the template? - you'll need to parse and re-write the JSON somehow
 
-		// view
-		this.composeWith('stui5:view');
+		// Component.js
+
+		// view and controller
+		this.composeWith('stui5:view', {
+			viewName: this.config.get('rootViewName');
+		});
 
 		// eslintrc
-		// TODO: check config for any overwritten properties that are to be merged into the template - you'll need to parse and re-write the JSON somehow
 
+	}
+
+	end(){
+		// TODO: git init and .gitignore
 	}
 
 };
