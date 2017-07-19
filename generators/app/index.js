@@ -50,6 +50,10 @@ module.exports = class extends Generator {
 			}
 		);
 		this.log('Copied ', sFilePath);
+
+		// view
+		this.composeWith('stui5:view', {});
+
 	}
 
 };

@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="scb.fleetman.controller.Blank"
+	controllerName="<%= controllerName %>"
 	displayBlock="true"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m">
