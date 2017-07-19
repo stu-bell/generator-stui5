@@ -24,3 +24,7 @@ These instructions assume you've installed yo via npm and are running it from th
 ## Configuration
 
 Yeoman uses a config file `.yo-rc.json` at the root directory of the project you're generating. If you find a specific configuration you like, keep a copy of the config file for use in future projects. Yeoman will generate a default config file in the current directory if it can't find one. Any mandatory parameters missing from the config file will be asked for at the command prompt when the generator is run.
+
+# Extending
+
+Writing a yeoan generator is pretty straight forward.  There's a good tutorial at [yeoman.io](http://yeoman.io/authoring/). You can either write your own generator or enhance this one (open a merge request on GitLab). Keep in mind that generators can and should be composable. 
