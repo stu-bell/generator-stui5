@@ -2,7 +2,19 @@ var Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
 
+	// ********************************************************* //
+	// run loop: http://yeoman.io/authoring/running-context.html
+	// ******************************************************* //
+
+	initializing(){
+		// generate default config
+		this.composeWith('stui5:config', {});
+	}
+
 	prompting() {
+		// TODO: build array of prompts for mandatory parmaters not present on the config
+		// TODO: prompt: would you like to edit the config file before proceding? default No. If yes, edit rc then rerun generator.
+
 		// prompts returned as a promise
 		return this.prompt([
 			{
@@ -23,6 +35,7 @@ module.exports = class extends Generator {
 				message: 'Would you like to include .eslintrc?'
 			}
 		]).then((responses) => {
+			// TODO: save to config.
 			// save for runtime
 			this.mUser = {
 				name: responses.name,
@@ -41,6 +54,7 @@ module.exports = class extends Generator {
 	}
 
 	writing() {
+		// index.html
 		var sFilePath = 'index.html';
 		this.fs.copyTpl(
 			this.templatePath(sFilePath),
@@ -50,6 +64,9 @@ module.exports = class extends Generator {
 			}
 		);
 		this.log('Copied ', sFilePath);
+
+		// manifest.json
+		// TODO: check config for any overwritten manifest parameters to merge into the template? - you'll need to parse and re-write the JSON somehow
 
 		// view
 		this.composeWith('stui5:view', {});
