@@ -8,7 +8,8 @@ module.exports = class extends Generator {
 
 		// register additional arguments
 		this.argument('viewName', {
-			description: 'Name of the view. Prepended to .view.xml', required: false
+			description: 'Name of the view. Prepended to .view.xml',
+			required: true
 		});
 		this.argument('controllerName', {
 			description: 'Name of the controller. Prepended to .controller.js. Defaults to viewName',
@@ -18,7 +19,7 @@ module.exports = class extends Generator {
   }
 
 	prompting(){
-		// TODO: prompt for any missing options not passed through options
+		// TODO: prompt for any missing options not passed through options - although not actually needed becuase it'll complain if you don't supply required arguments
 	}
 
 	writing() {

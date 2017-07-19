@@ -19,7 +19,7 @@ These instructions assume you've installed yo via npm and are running it from th
 |Command  |Description  
 |--|--|
 |`yo stui5`        | Generate a new UI5 app from scratch
-|`yo stui5:view`   | Add a view to an existing app
+|`yo stui5:view <viewName>`   | Add a view to an existing app, where <viewName> is the name of the view. Gets prepended to `.view.xml`
 |`yo stui5:config` | Generate a default .yo-rc.json configuration file
 
 ## Configuration
