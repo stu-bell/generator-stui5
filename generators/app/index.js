@@ -13,31 +13,47 @@ module.exports = class extends Generator {
 	}
 
 	prompting() {
-		// TODO: build array of prompts for mandatory parmaters not present on the config
-		// TODO: prompt: would you like to edit the config file before proceding? default No. If yes, edit rc then rerun generator.
 
-		var aPrompts = [];
+		// check if a config key has a value
+		var isConfigNil = sKey => R.isNil(this.config.get(sKey));
+		// check if a prompt is required (not required if the prompt is already in config)
+		var isPromptReq = R.pipe(R.prop('name'), isConfigNil);
 
+		var aPromptIfUnknown = [
+			{
+				type: 'input',
+				name: 'name',
+				message: 'What\'s your project name?',
+				default: this.appname //default to current folder name
+			},
+			{
+				type: 'input',
+				name: 'namespace',
+				message: 'What\'s your project namespace?',
+				// default: slugify(this.appname) // TODO: slugify
+			}
+		],
+		aPromptAlways = [
+			{
+				type: 'confirm',
+				name: 'view-yo-rc',
+				message: 'Would you like to change the full config before continuing?',
+				default: 'n',
+				warning: 'When you\'re happy with your config, re-run the generator'
+			}
+		],
+		// prompt with only those required and those which should always be prompted
+		aPrompts = R.concat(R.filter(isPromptReq, aPromptIfUnknown), aPromptAlways);
 
-		// prompt returned as a promise
-		return this.prompt(aPrompts).then((responses) => {
-			// TODO: save to config.
+		// return promises for the promptss
+		return this.prompt(aPrompts)
+		.then((responses) => {
+			// save to config.
+			this.config.set(responses);
 
-			// save for runtime
-			this.mUser = {
-				name: responses.name,
-				namespace: responses.namespace
-			};
-			// persist config
-			this.config.set(this.mUser);
-
-			// logs
-			this.log('Include .eslintrc:', responses.lint);
+			// TODO: finish early if they want to edit the config
+			// if (responses.view-yo-rc === true) { // finish early }
 		});
-	}
-
-	method1() {
-		this.log('method1 just ran :D');
 	}
 
 	writing() {
@@ -46,8 +62,8 @@ module.exports = class extends Generator {
 		this.fs.copyTpl(
 			this.templatePath(sFilePath),
 			this.destinationPath(sFilePath),
-			{ title: this.mUser.name,
-				namespace: this.mUser.namespace
+			{ title: this.config.get('name'),
+				namespace: this.config.get('namespace'),
 			}
 		);
 		this.log('Copied ', sFilePath);
