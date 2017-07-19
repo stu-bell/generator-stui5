@@ -1,9 +1,9 @@
 # UI5 Yeoman Generator
 ## Super template for UI5
 
-[Yeoman](yeoman.io) is a [Node.js](nodejs.org) package for generating code projects from pre-defined templates known as _generators_. This project is a generator for starting [UI5](openui5.org) projects.
+[Yeoman](http://yeoman.io) is a [Node.js](http://nodejs.org) package for generating code projects from pre-defined templates known as _generators_. This project is a generator for starting [UI5](http://openui5.org) projects.
 
-People have written thousands of generators, and not just for JavaScript projects. You may find an existing one that suits your needs. Search the full list at [yeoman.io](http://yeoman.io/generators/). There are a few UI5 generators (search UI5 in the search field) but none of them were to my taste, hence this one.
+People have written thousands of yeoman generators, and not just for JavaScript projects. You may find an existing one that suits your needs. See the full list at [yeoman.io](http://yeoman.io/generators/). There are a few UI5 generators (search UI5 in the search field) but none of them were to my taste, hence this one.
 
 # Installation
 
