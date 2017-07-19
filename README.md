@@ -18,8 +18,9 @@ These instructions assume you've installed yo via npm and are running it from th
 
 |Command  |Description  
 |--|--|
-|`yo stui5`      |  Generate a new UI5 app from scratch
-|`yo stui5:view` |  Add a view to an existing app
+|`yo stui5`        | Generate a new UI5 app from scratch
+|`yo stui5:view`   | Add a view to an existing app
+|`yo stui5:config` | Generate a default .yo-rc.json configuration file
 
 ## Configuration
 
@@ -31,4 +32,4 @@ Writing a yeoan generator is pretty straight forward.  There's a good tutorial a
 
 ## Adding config options
 
-Default parameters go in the defaults object in `config/index.js`. Mandatory parameters for which there is no default should have a prompt added _if the parameter isn't already available in the config file_. 
+Default parameters go in the defaults object in `config/index.js`. Mandatory parameters for which there is no default should have a prompt added _if the parameter isn't already available in the config file_.

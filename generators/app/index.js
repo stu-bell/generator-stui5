@@ -29,30 +29,34 @@ module.exports = class extends Generator {
 			{
 				type: 'input',
 				name: 'namespace',
-				message: 'What\'s your project namespace?',
-				// default: slugify(this.appname) // TODO: slugify
+				// default: slugify(this.appname), // TODO: slugify https://www.npmjs.com/package/underscore.string
+				message: 'What\'s your project namespace?'
 			}
 		],
 		aPromptAlways = [
 			{
 				type: 'confirm',
-				name: 'view-yo-rc',
-				message: 'Would you like to change the full config before continuing?',
-				default: 'n',
-				warning: 'When you\'re happy with your config, re-run the generator'
+				name: 'proceed_yo_rc',
+				message: 'Are you happy to proceed with the exsitng yo-rc config?',
 			}
 		],
 		// prompt with only those required and those which should always be prompted
 		aPrompts = R.concat(R.filter(isPromptReq, aPromptIfUnknown), aPromptAlways);
 
-		// return promises for the promptss
-		return this.prompt(aPrompts)
-		.then((responses) => {
-			// save to config.
+		// return promises for the prompts
+		return this.prompt(aPrompts).then((responses) => {
+
+			// start by saving all responses to config.
 			this.config.set(responses);
 
-			// TODO: finish early if they want to edit the config
-			// if (responses.view-yo-rc === true) { // finish early }
+			// delete responses not needed for config
+			this.config.delete('proceed_yo_rc');
+
+			// finish early if they want to edit the config
+			if (responses.proceed_yo_rc === false) {
+				this.log('Modify your .yo-rc.json config file then re-run the generator');
+				// TODO finish early - Do we really need this option at all?/
+			}
 		});
 	}
 
@@ -72,10 +76,10 @@ module.exports = class extends Generator {
 		// TODO: check config for any overwritten properties that are to be merged into the template? - you'll need to parse and re-write the JSON somehow
 
 		// view
-		this.composeWith('stui5:view', {});
+		this.composeWith('stui5:view');
 
 		// eslintrc
-		// TODO: check config for any overwritten properties that are to be merged into the template.
+		// TODO: check config for any overwritten properties that are to be merged into the template - you'll need to parse and re-write the JSON somehow
 
 	}
 
