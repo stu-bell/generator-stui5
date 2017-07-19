@@ -10,14 +10,13 @@ module.exports = class extends Generator {
 	initializing(){
 		// generate default config
 		this.composeWith('stui5:config', {});
-		this.log("1+1 is: ", R.add(1)(1))
 	}
 
 	prompting() {
 		// TODO: build array of prompts for mandatory parmaters not present on the config
 		// TODO: prompt: would you like to edit the config file before proceding? default No. If yes, edit rc then rerun generator.
 
-var aPrompts = [
+		var aPrompts = [
 			{
 				type: 'input',
 				name: 'name',
@@ -36,6 +35,8 @@ var aPrompts = [
 				message: 'Would you like to include .eslintrc?'
 			}
 		];
+
+		
 
 		// prompt returned as a promise
 		return this.prompt(aPrompts).then((responses) => {
