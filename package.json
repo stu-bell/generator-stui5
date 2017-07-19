@@ -8,6 +8,7 @@
   "keywords": ["yeoman-generator", "UI5"],
   "dependencies": {
     "yeoman-generator": "^1.0.0",
-    "ramda": "^0.24.1"
+    "ramda": "^0.24.1",
+    "underscore.string": "^3.3.4"
   }
 }

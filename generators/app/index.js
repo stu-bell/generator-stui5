@@ -1,5 +1,6 @@
 var Generator = require('yeoman-generator'),
-R = require('ramda');
+R = require('ramda'),
+slugify = require('underscore.string/slugify');
 
 module.exports = class extends Generator {
 
@@ -29,7 +30,7 @@ module.exports = class extends Generator {
 			{
 				type: 'input',
 				name: 'namespace',
-				// default: slugify(this.appname), // TODO: slugify https://www.npmjs.com/package/underscore.string
+				default: slugify(this.appname),
 				message: 'What\'s your project namespace?'
 			}
 		],
@@ -78,7 +79,7 @@ module.exports = class extends Generator {
 
 		// view and controller
 		this.composeWith('stui5:view', {
-			viewName: this.config.get('rootViewName');
+			viewName: this.config.get('rootViewName')
 		});
 
 		// eslintrc
