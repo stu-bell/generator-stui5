@@ -1,4 +1,5 @@
-var Generator = require('yeoman-generator');
+var Generator = require('yeoman-generator'),
+R = require('ramda');
 
 module.exports = class extends Generator {
 
@@ -9,14 +10,14 @@ module.exports = class extends Generator {
 	initializing(){
 		// generate default config
 		this.composeWith('stui5:config', {});
+		this.log("1+1 is: ", R.add(1)(1))
 	}
 
 	prompting() {
 		// TODO: build array of prompts for mandatory parmaters not present on the config
 		// TODO: prompt: would you like to edit the config file before proceding? default No. If yes, edit rc then rerun generator.
 
-		// prompts returned as a promise
-		return this.prompt([
+var aPrompts = [
 			{
 				type: 'input',
 				name: 'name',
@@ -34,8 +35,12 @@ module.exports = class extends Generator {
 				name: 'lint',
 				message: 'Would you like to include .eslintrc?'
 			}
-		]).then((responses) => {
+		];
+
+		// prompt returned as a promise
+		return this.prompt(aPrompts).then((responses) => {
 			// TODO: save to config.
+
 			// save for runtime
 			this.mUser = {
 				name: responses.name,
@@ -66,10 +71,13 @@ module.exports = class extends Generator {
 		this.log('Copied ', sFilePath);
 
 		// manifest.json
-		// TODO: check config for any overwritten manifest parameters to merge into the template? - you'll need to parse and re-write the JSON somehow
+		// TODO: check config for any overwritten properties that are to be merged into the template? - you'll need to parse and re-write the JSON somehow
 
 		// view
 		this.composeWith('stui5:view', {});
+
+		// eslintrc
+		// TODO: check config for any overwritten properties that are to be merged into the template.
 
 	}
 
