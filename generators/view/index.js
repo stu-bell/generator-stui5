@@ -2,22 +2,35 @@ var Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
 
+  constructor(args, opts) {
+    // call super constructor
+    super(args, opts);
+
+		// register additional arguments
+		this.argument('viewName', {
+			description: 'Name of the view. Prepended to .view.xml', required: false
+		});
+		this.argument('controllerName', {
+			description: 'Name of the controller. Prepended to .controller.js. Defaults to viewName',
+			required: false,
+			default: this.options.viewName
+		});
+  }
+
 	prompting(){
 		// TODO: prompt for any missing options not passed through options
-		// default controller name to that of view name?
-		// TODO get options passed for generating viewname and controller name later
 	}
 
 	writing() {
 		// XML view
 		var sFilePath = 'view/',
-			sFileName = 'viewName',
+			sFileName = this.options.viewName,
 			sFileExtension = '.view.xml',
 			sFullName = sFilePath + sFileName + sFileExtension;
 		this.fs.copyTpl(
 			this.templatePath('template.view.xml'),
 			this.destinationPath(sFullName),
-			{ controllerName: 'viewName' + '.controller' }
+			{ controllerName: this.options.controllerName + '.controller' }
 		);
 		this.log('Copied ', sFullName);
 
