@@ -4,6 +4,21 @@ slugify = require('underscore.string/slugify');
 
 module.exports = class extends Generator {
 
+  constructor(args, opts) {
+    // call super constructor
+    super(args, opts);
+
+		// register additional arguments
+		this.argument('namespace', {
+			description: 'What\'s your project namespace?' ,
+			required: false
+		});
+		this.argument('title', {
+			description: 'What\'s your app title?',
+			required: false
+		});
+  }
+
 	// ********************************************************* //
 	// run loop: http://yeoman.io/authoring/running-context.html
 	// ******************************************************* //
@@ -11,6 +26,9 @@ module.exports = class extends Generator {
 	initializing(){
 		// generate default config
 		this.composeWith('stui5:config', {});
+
+		// save arguments passed
+		this.config.set(R.pick(['namespace', 'title'], this.options));
 	}
 
 	prompting() {
@@ -23,15 +41,15 @@ module.exports = class extends Generator {
 		var aPromptIfUnknown = [
 			{
 				type: 'input',
-				name: 'name',
-				message: 'What\'s your project name?',
-				default: this.appname //default to current folder name
-			},
-			{
-				type: 'input',
 				name: 'namespace',
 				default: slugify(this.appname),
 				message: 'What\'s your project namespace?'
+			},
+			{
+				type: 'input',
+				name: 'title',
+				message: 'What\'s your app title?',
+				default: this.appname //default to current folder name
 			}
 		],
 		aPromptAlways = [
@@ -67,7 +85,7 @@ module.exports = class extends Generator {
 		this.fs.copyTpl(
 			this.templatePath(sFilePath),
 			this.destinationPath(sFilePath),
-			{ title: this.config.get('name'),
+			{ title: this.config.get('title'),
 				namespace: this.config.get('namespace'),
 			}
 		);
@@ -79,7 +97,7 @@ module.exports = class extends Generator {
 
 		// view and controller
 		this.composeWith('stui5:view', {
-			viewName: this.config.get('rootViewName')
+			viewName: 'app'
 		});
 
 		// eslintrc
