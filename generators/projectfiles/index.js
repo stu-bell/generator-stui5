@@ -30,15 +30,20 @@ module.exports = class extends Generator {
 	// ******************************************************* //
 
 	writing() {
-    var isTrue = this.configEq(this.config.getAll(), true);
+    var isTrue = this.configEq(this.config.getAll(), true),
+    rootCopy = this.copy('.');
 
     // copy project files
     // eslint
     if(isTrue('eslint')){
-      this.copy('.', '.eslintrc');
+      rootCopy('.eslintrc');
     }
 
-    // TODO: gitignore
+    // gitignore
+    if (isTrue('gitInit')) {
+      rootCopy('.gitignore');
+    }
+
     // TODO: gruntfile
 	}
 
