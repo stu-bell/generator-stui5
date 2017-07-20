@@ -14,7 +14,7 @@ module.exports = class extends Generator {
 		sRootPath = this.config.get('webappRoot'),
 		webappTmpl = propsTmpl(sRootPath);
 
-    // copy core webapp files
+		// copy core webapp files
 		webappTmpl('index.html');
 		webappTmpl('manifest.json');
 		webappTmpl('Component.js');
@@ -27,6 +27,17 @@ module.exports = class extends Generator {
 			this.log('baseController true')
 			propsTmpl(this.jPath(sRootPath, "controller"), 'Base.controller.js');
 		}
+
+		// formatter
+		if (this.isConfigTrue('formatter')) {
+			this.copy(this.jPath(sRootPath, 'util'), 'formatter.js');
+		}
+
+		// mock server
+		if (this.isConfigTrue('mockServer')) {
+			this.copy(this.jPath(sRootPath, 'util'), 'MockServer.js');
+		}
+
 
 	}
 

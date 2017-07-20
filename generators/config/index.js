@@ -12,6 +12,8 @@ module.exports = class extends Generator {
 			rootViewName: "App",
 			webappRoot: "webapp",
 			baseController: true,
+			formatter: true,
+			mockServer: true,
 			gitInit: true,
 			eslint: true
 		});
