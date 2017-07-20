@@ -1,4 +1,5 @@
-var Generator = require('yeoman-generator');
+var Generator = require('yeoman-generator'),
+R = require('ramda');
 
 module.exports = class extends Generator {
 
@@ -26,6 +27,11 @@ module.exports = class extends Generator {
       description: 'Path to the root folder of webapp',
       default: this.config.get('webappRoot')
     });
+
+
+		// helper methods
+		this.jPath = R.unapply(R.join('/'));
+  	this.jName = R.unapply(R.join('.'));
   }
 
 	// ********************************************************* //
@@ -44,20 +50,13 @@ module.exports = class extends Generator {
       sFullPath = this.jPath(sPath, sName);
 		this.fs.copyTpl(
 			this.templatePath('template.view.xml'),
-			this.destinationPath(sFullName),
+			this.destinationPath(sFullPath),
 			{ controllerName: this.options.controllerName + '.controller' }
 		);
-		this.log('Copied ', sFullName);
+		this.log('Copied ', sFullPath);
 
 		// TODO: JS controller
 	}
 
-
-	// ********************************************************* //
-	// helpers
-	// ******************************************************* //
-
-  this.jPath = R.unapply(R.join('/'));
-  this.jName = R.unapply(R.join('.'));
 
 };

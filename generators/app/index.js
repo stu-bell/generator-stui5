@@ -17,6 +17,12 @@ module.exports = class extends Generator {
 			description: 'What\'s your app title?',
 			required: false
 		});
+
+
+		// helper methods
+		this.jPath = R.unapply(R.join('/'));
+  	this.jName = R.unapply(R.join('.'));
+
   }
 
 	// ********************************************************* //
@@ -93,10 +99,4 @@ module.exports = class extends Generator {
 		// TODO: git init and .gitignore
 	}
 
-	// ********************************************************* //
-	// helpers
-	// ******************************************************* //
-
-  this.jPath = R.unapply(R.join('/'));
-  this.jName = R.unapply(R.join('.'));
 };
