@@ -25,6 +25,7 @@ Although you can directly call any sub-generator included in this generator, som
 |stui5  |`yo stui5`        | Generate a new UI5 app from scratch
 |stui5:view  |`yo stui5:view <viewName>`   | Add a view to an existing app, where `<viewName>` gets prepended to `.view.xml` for the view name
 |stui5:config  |`yo stui5:config` | Generate a default .yo-rc.json configuration file
+|stui5:fragment <fragmentName>|
 
 ## Configuration
 

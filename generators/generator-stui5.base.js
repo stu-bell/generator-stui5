@@ -20,6 +20,13 @@ module.exports = class extends Generator {
 				this.destinationPath(this.jPath(sDestPath, sName))
 			);
 		};
+    this.copyFT = (sFrom, sTo) => {
+      this.fs.copy(
+        this.templatePath(sFrom),
+        this.destinationPath(sTo)
+      );
+    };
+
 		this.tmpl = R.curry((mProps, sDestPath, sName) => {
 			this.fs.copyTpl(
 				this.templatePath(sName),
@@ -27,8 +34,6 @@ module.exports = class extends Generator {
 				mProps
 			);
 		});
-
-		this.flipPick = R.flip(R.pick);
 
 		this.tmplFT = R.curry((mProps, sFrom, sTo) => {
 			this.fs.copyTpl(
@@ -38,6 +43,7 @@ module.exports = class extends Generator {
 			);
 		});
     this.configEq = R.curry((mConfig, value, sKey) => (R.propEq(sKey, value, mConfig)));
+    this.flipPick = R.flip(R.pick);
     this.isConfig = R.curry((value, sKey) => R.equals(value, this.config.get(sKey)));
     this.isConfigTrue = this.isConfig(true);
 	};
