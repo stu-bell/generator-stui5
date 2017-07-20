@@ -77,22 +77,14 @@ module.exports = class extends Generator {
 	}
 
 	writing() {
-		var mProps = R.pick(['appTitle', 'appNamespace'], this.config.getAll()),
-		jRoot = R.partial(this.jPath, [this.config.get('webappRoot')]),
-		sRootPath = this.config.get('webappRoot'),
-		rootTmpl = this.tmpl(mProps, sRootPath);
+		var pickConfig = this.pickConfig(this.config.getAll()),
+		aPropNames = ['appTitle', 'appNamespace'],
+		webappTmpl = this.tmpl(pickConfig(aPropNames), this.config.get('webappRoot'));
 
-		var config = this.pickConfig(this.config.getAll());
-		this.log(config('appTitle', 'gitInit'));
-
-		// index.html
-		rootTmpl('index.html');
-
-		// manifest.json
-		rootTmpl('manifest.json');
-
-		// Component.js
-		rootTmpl('Component.js');
+		// webapp root templates
+		webappTmpl('index.html');
+		webappTmpl('manifest.json');
+		webappTmpl('Component.js');
 
 		// view and controller
 		this.composeWith('stui5:view', {

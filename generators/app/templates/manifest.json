@@ -2,11 +2,11 @@
   "_version": "1.1.0",
   "sap.app": {
     "_version": "1.1.0",
-    "id": "scb.fleetman",
+    "id": "<%= appNamespace %>",
     "type": "application",
     "i18n": "i18n/messageBundle.properties",
     "applicationVersion": {
-      "version": "1.1.0"
+      "version": "0.1.0"
     },
     "offline": false
   },
@@ -24,7 +24,7 @@
   },
   "sap.ui5": {
     "_version": "1.1.0",
-    "rootView": "scb.fleetman.view.App",
+    "rootView": "<%= appNamespace %>.view.App",
     "dependencies": {
       "minUI5Version": "1.30",
       "libs": {
@@ -39,7 +39,7 @@
       }
     },
     "resourceRoots": {
-      "scb.fleetman": "./"
+      "<%= appNamespace %>": "./"
     },
     "config": {
       "resourceBundle": "i18n/messageBundle.properties"
@@ -48,7 +48,7 @@
       "config": {
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
-        "viewPath" : "scb.fleetman.view",
+        "viewPath" : "<%= appNamespace %>.view",
         "clearTarget" : false,
         "controlId": "app",
         "controlAggregation": "pages"
