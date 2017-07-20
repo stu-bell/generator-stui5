@@ -11,6 +11,7 @@ module.exports = class extends Generator {
   // helper methods
 	// ******************************************************* //
   // TODO: jsdoc all of these!
+    this.pathify = R.replace(/\./g, '/');
 		this.jPath = R.unapply(R.join('/'));
   	this.jName = R.unapply(R.join('.'));
 		this.copy = (sDestPath, sName) => {

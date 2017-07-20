@@ -21,7 +21,7 @@ module.exports = class extends Generator {
 
 		// base controller
 		if (this.isTrue(this.config.get('baseController'))) {
-			propsTmpl(this.jPath(sRootPath, "controller/Base.controller.js"), 'Base.controller.js');
+			propsTmpl(this.jPath(sRootPath, "controller"), 'Base.controller.js');
 		}
 
 	}

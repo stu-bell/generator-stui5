@@ -70,7 +70,7 @@ module.exports = class extends Generator {
     // set base controller path
 		if (this.isTrue(this.config.get('baseController'))) {
       // super controller path is the base
-      this.config.set('superControllerPath', this.jPath(this.config.get('appNamespace'), 'controller/Base'));
+      this.config.set('superControllerPath', this.jPath(this.pathify(this.config.get('appNamespace')), 'controller/Base.controller'));
     } else {
       // super controller path is sap controller
       this.config.set('superControllerPath', "sap/ui/core/mvc/Controller");
