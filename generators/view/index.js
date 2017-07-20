@@ -32,7 +32,20 @@ module.exports = class extends Generator {
 		// helper methods
 		this.jPath = R.unapply(R.join('/'));
   	this.jName = R.unapply(R.join('.'));
-  }
+		this.flipPick = R.flip(R.pick);
+		this.copy = (sDestPath, sName) => {
+			this.fs.copy(
+				this.templatePath(sName),
+				this.destinationPath(this.jPath(sDestPath, sName))
+			);
+		};
+		this.tmplFT = R.curry((mProps, sFrom, sTo) => {
+			this.fs.copyTpl(
+				this.templatePath(sFrom),
+				this.destinationPath(sTo),
+				mProps
+			);
+		});
 
 	// ********************************************************* //
 	// run loop: http://yeoman.io/authoring/running-context.html
@@ -43,18 +56,19 @@ module.exports = class extends Generator {
 	}
 
 	writing() {
-    // XML view
-		var
-      sPath = this.jPath(this.options.webappRoot, 'view'),
-      sName = this.jName(this.options.viewName, 'view.xml'),
-      sFullPath = this.jPath(sPath, sName);
-		this.fs.copyTpl(
-			this.templatePath('template.view.xml'),
-			this.destinationPath(sFullPath),
-			{ controllerName: this.options.controllerName + '.controller' }
-		);
 
-		// TODO: JS controller
+		var
+    sViewPath = this.jPath(this.options.webappRoot, 'view', this.jName(this.options.viewName, 'view.xml')),
+    sControllerPath = this.jPath(this.options.webappRoot, 'controller', this.jName(this.options.controllerName, 'controller.js')),
+    pickConfig = this.flipPick(this.config.getAll()),
+    pickOptions = this.flipPick(this.options),
+		mProps = R.merge(pickConfig(['appNamespace'), pickOptions(["controllerName"]), {baseController: "sap/ui/core/mvc/Controller"});
+
+    // XML view
+    this.tmplFT(mProps, 'template.view.xml', sViewPath);
+
+		// JS controller
+		this.tmplFT(mProps, 'template.controller.js', sControllerPath);
 	}
 
 

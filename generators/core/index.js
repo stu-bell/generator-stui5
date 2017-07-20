@@ -15,7 +15,7 @@ module.exports = class extends Generator {
 		// helper methods
 		this.jPath = R.unapply(R.join('/'));
   	this.jName = R.unapply(R.join('.'));
-		this.pickConfig = R.flip(R.pick);
+		this.flipPick = R.flip(R.pick);
 		this.copy = (sDestPath, sName) => {
 			this.fs.copy(
 				this.templatePath(sName),
@@ -37,7 +37,7 @@ module.exports = class extends Generator {
 	// ******************************************************* //
 
 	writing() {
-		var pickConfig = this.pickConfig(this.config.getAll()),
+		var pickConfig = this.flipPick(this.config.getAll()),
 		aPropNames = ['appTitle', 'appNamespace'],
 		webappTmpl = this.tmpl(pickConfig(aPropNames), this.config.get('webappRoot'));
 
