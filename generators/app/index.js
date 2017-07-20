@@ -104,8 +104,8 @@ module.exports = class extends Generator {
       this.composeWith(require.resolve('generator-git-init/generators/app'), {
          commit: 'Initial commit by yeoman stui5'
       });
+      this.log('Git repository initialised');
     }
-    this.log('Git repository initialised')
   }
 
 };
