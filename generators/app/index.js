@@ -9,7 +9,7 @@ module.exports = class extends Generator {
     super(args, opts);
 
 		// register additional arguments
-		this.argument('appNameSpace', {
+		this.argument('appNamespace', {
 			description: 'What\'s your project namespace?' ,
 			required: false
 		});
@@ -22,7 +22,6 @@ module.exports = class extends Generator {
 		// helper methods
 		this.jPath = R.unapply(R.join('/'));
   	this.jName = R.unapply(R.join('.'));
-		this.jRoot = R.partial(this.jPath, [this.config.get.bind(this, 'webappRoot')]);
 		this.tmpl = (sFrom, sTo, mProps) => {
 			this.fs.copyTpl(
 				this.templatePath(sFrom),
@@ -41,7 +40,7 @@ module.exports = class extends Generator {
 		this.composeWith('stui5:config', {});
 
 		// save arguments passed
-		this.config.set(R.pick(['appNameSpace', 'appTitle'], this.options));
+		this.config.set(R.pick(['appNamespace', 'appTitle'], this.options));
 	}
 
 	prompting() {
@@ -54,7 +53,7 @@ module.exports = class extends Generator {
 		var aPromptIfUnknown = [
 			{
 				type: 'input',
-				name: 'appNameSpace',
+				name: 'appNamespace',
 				default: slugify(this.appname),
 				message: 'What\'s your project namespace?'
 			},
@@ -77,10 +76,16 @@ module.exports = class extends Generator {
 	}
 
 	writing() {
-		var mProps = R.pick(['appTitle', 'appNamespace'], this.config.getAll());
+		var mProps = R.pick(['appTitle', 'appNamespace'], this.config.getAll()),
+		jRoot = R.partial(this.jPath, [this.config.get('webappRoot')]);
 		// index.html
 		var sName = 'index.html',
-		sFullPath = this.jRoot(sName);
+		sFullPath = jRoot(sName);
+
+this.log(sName)
+this.log(sFullPath)
+this.log(mProps)
+
 		this.tmpl(sName, sFullPath, mProps)
 		// manifest.json
 
