@@ -68,7 +68,7 @@ module.exports = class extends Generator {
     // TODO check config isn't demanding anything nonsensical
 
     // set base controller path
-		if (this.isTrue(this.config.get('baseController'))) {
+		if (this.isConfigTrue('baseController')) {
       // super controller path is the base
       this.config.set('superControllerPath', this.jPath(this.pathify(this.config.get('appNamespace')), 'controller/Base.controller'));
     } else {

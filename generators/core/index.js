@@ -20,8 +20,12 @@ module.exports = class extends Generator {
 		webappTmpl('Component.js');
 
 		// base controller
-		if (this.isTrue(this.config.get('baseController'))) {
+		if (this.isConfigTrue('baseController')) {
+			this.log('baseController true')
 			propsTmpl(this.jPath(sRootPath, "controller"), 'Base.controller.js');
+		} else {
+			this.log('baseController FALSE')
+
 		}
 
 	}
