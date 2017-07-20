@@ -14,6 +14,8 @@ module.exports = class extends Generator {
 			baseController: true,
 			formatter: true,
 			mockServer: true,
+			gruntfile: true,
+			ci: true,
 			gitInit: true,
 			eslint: true
 		});

@@ -8,8 +8,7 @@ module.exports = class extends Generator {
 	// ******************************************************* //
 
 	writing() {
-    var isTrue = this.configEq(this.config.getAll(), true),
-    rootCopy = sName => {
+    var rootCopy = sName => {
       this.fs.copy(
         this.templatePath(sName),
         this.destinationPath(sName)
@@ -19,16 +18,25 @@ module.exports = class extends Generator {
 
     // copy project files
     // eslint
-    if(isTrue('eslint')){
+    if(this.isConfigTrue('eslint')){
       rootCopy('.eslintrc');
     }
 
     // gitignore
-    if (isTrue('gitInit')) {
+    if (this.isConfigTrue('gitInit')) {
       rootCopy('.gitignore');
     }
 
-    // TODO: gruntfile
+    // ci
+    if (this.isConfigTrue('ci')) {
+      rootCopy('.gitlab-ci.yml');
+    }
+
+    // gruntfile
+    if (this.isConfigTrue('gruntfile')) {
+      rootCopy('Gruntfile.js');
+    }
+
 	}
 
 

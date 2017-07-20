@@ -1,0 +1,83 @@
+# Continuous Integration & Deployment for UI5 Applications
+#
+# Perform quality, testing, packaging and deployment for UI5 applications.
+# Can be used in your own projects in its entirety or selected stages depending on requirements.
+#
+# @author Oliver Rogers - Bluefin Solutions
+# @since  19-July-2017
+
+cache:
+  key: "$CI_BUILD_REF_NAME"
+  paths:
+    - node_modules/
+
+before_script:
+  - "npm install && npm update && npm prune"
+
+stages:
+  - quality
+  - build
+  - test
+  - deploy
+
+
+# (1) Quality Steps
+eslint:
+  stage: quality
+  script:
+    - "grunt eslint"
+
+xml_validator:
+  stage: quality
+  script:
+    - "grunt xml_validator"
+
+deps_check:
+  stage: quality
+  allow_failure: yes
+  script:
+    - "david"
+
+
+# (2) Build Tasks
+preload_app:
+  stage: build
+  artifacts:
+    paths:
+      - "build/"
+  script:
+    - "grunt build"
+
+configure_ui5:
+  stage: build
+  artifacts:
+    paths:
+      - "ui5/"
+  script:
+    - "grunt downloadUI5"
+
+
+# (3) Automatic Test Steps
+#integration:
+#  stage: test
+#  script:
+#    - "grunt ui5_tester_toolkit"
+
+qunit:
+  stage: test
+  script:
+    - "grunt test"
+
+
+# (4) Manual Review App Steps
+# [TBC]
+
+
+# (5) Deployment Steps
+deploy:
+  stage: deploy
+  only:
+    - "master"
+  script:
+    - "grunt deploy"
+  environment: abap
