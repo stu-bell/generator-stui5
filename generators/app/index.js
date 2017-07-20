@@ -9,11 +9,11 @@ module.exports = class extends Generator {
     super(args, opts);
 
 		// register additional arguments
-		this.argument('namespace', {
+		this.argument('appNameSpace', {
 			description: 'What\'s your project namespace?' ,
 			required: false
 		});
-		this.argument('title', {
+		this.argument('appTitle', {
 			description: 'What\'s your app title?',
 			required: false
 		});
@@ -28,7 +28,7 @@ module.exports = class extends Generator {
 		this.composeWith('stui5:config', {});
 
 		// save arguments passed
-		this.config.set(R.pick(['namespace', 'title'], this.options));
+		this.config.set(R.pick(['appNameSpace', 'appTitle'], this.options));
 	}
 
 	prompting() {
@@ -41,13 +41,13 @@ module.exports = class extends Generator {
 		var aPromptIfUnknown = [
 			{
 				type: 'input',
-				name: 'namespace',
+				name: 'appNameSpace',
 				default: slugify(this.appname),
 				message: 'What\'s your project namespace?'
 			},
 			{
 				type: 'input',
-				name: 'title',
+				name: 'appTitle',
 				message: 'What\'s your app title?',
 				default: this.appname //default to current folder name
 			}
@@ -69,8 +69,8 @@ module.exports = class extends Generator {
 		this.fs.copyTpl(
 			this.templatePath(sFilePath),
 			this.destinationPath(sFilePath),
-			{ title: this.config.get('title'),
-				namespace: this.config.get('namespace'),
+			{ title: this.config.get('appTitle'),
+				namespace: this.config.get('appNameSpace'),
 			}
 		);
 		this.log('Copied ', sFilePath);
