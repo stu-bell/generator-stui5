@@ -22,13 +22,13 @@ module.exports = class extends Generator {
 		// helper methods
 		this.jPath = R.unapply(R.join('/'));
   	this.jName = R.unapply(R.join('.'));
-		this.tmpl = (sFrom, sTo, mProps) => {
+		this.tmpl = R.curry((mProps, sDestPath, sName) => {
 			this.fs.copyTpl(
-				this.templatePath(sFrom),
-				this.destinationPath(sTo),
+				this.templatePath(sName),
+				this.destinationPath(this.jPath(sDestPath, sName)),
 				mProps
 			);
-		};
+		});
   }
 
 	// ********************************************************* //
@@ -77,16 +77,15 @@ module.exports = class extends Generator {
 
 	writing() {
 		var mProps = R.pick(['appTitle', 'appNamespace'], this.config.getAll()),
-		jRoot = R.partial(this.jPath, [this.config.get('webappRoot')]);
+		jRoot = R.partial(this.jPath, [this.config.get('webappRoot')]),
+		sRootPath = this.config.get('webappRoot'),
+		sIndexName = 'index.html',
+		sComponentName = 'Component.js',
+		sManifestName = 'manifest.json';
+
 		// index.html
-		var sName = 'index.html',
-		sFullPath = jRoot(sName);
+		this.tmpl(mProps, sRootPath, sIndexName);
 
-this.log(sName)
-this.log(sFullPath)
-this.log(mProps)
-
-		this.tmpl(sName, sFullPath, mProps)
 		// manifest.json
 
 		// Component.js
