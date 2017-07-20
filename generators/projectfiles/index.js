@@ -16,6 +16,7 @@ module.exports = class extends Generator {
 		this.jPath = R.unapply(R.join('/'));
   	this.jName = R.unapply(R.join('.'));
 		this.pickConfig = R.flip(R.pick);
+    this.configEq = R.curry((mConfig, value, sKey) => (R.propEq(sKey, value, mConfig)));
 		this.copy = (sDestPath, sName) => {
 			this.fs.copy(
 				this.templatePath(sName),
@@ -29,10 +30,16 @@ module.exports = class extends Generator {
 	// ******************************************************* //
 
 	writing() {
+    var isTrue = this.configEq(this.config.getAll(), true);
+
     // copy project files
-    
-    // TODO: check config
-		this.copy('.', '.eslintrc');
+    // eslint
+    if(isTrue('eslint')){
+      this.copy('.', '.eslintrc');
+    }
+
+    // TODO: gitignore
+    // TODO: gruntfile
 	}
 
 

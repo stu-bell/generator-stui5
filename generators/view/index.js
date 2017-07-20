@@ -53,7 +53,6 @@ module.exports = class extends Generator {
 			this.destinationPath(sFullPath),
 			{ controllerName: this.options.controllerName + '.controller' }
 		);
-		this.log('Copied ', sFullPath);
 
 		// TODO: JS controller
 	}

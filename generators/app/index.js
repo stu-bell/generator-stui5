@@ -88,7 +88,6 @@ module.exports = class extends Generator {
 		// README
 		this.tmpl({appTitle: this.config.get('appTitle')}, '.', 'README.md');
 
-
 		// project root templates
 		this.composeWith('stui5:projectfiles');
 
@@ -103,7 +102,7 @@ module.exports = class extends Generator {
 	}
 
 	end(){
-		// TODO: git init and .gitignore
+		// TODO: git init 
 	}
 
 };
