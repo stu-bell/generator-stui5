@@ -22,7 +22,13 @@ module.exports = class extends Generator {
 		// helper methods
 		this.jPath = R.unapply(R.join('/'));
   	this.jName = R.unapply(R.join('.'));
-		this.pickConfig = (mConfig) => R.unapply(R.flip(R.pick)(mConfig));
+		this.pickConfig = R.flip(R.pick);
+		this.copy = (sDestPath, sName) => {
+			this.fs.copy(
+				this.templatePath(sName),
+				this.destinationPath(this.jPath(sDestPath, sName))
+			);
+		};
 		this.tmpl = R.curry((mProps, sDestPath, sName) => {
 			this.fs.copyTpl(
 				this.templatePath(sName),
@@ -81,6 +87,11 @@ module.exports = class extends Generator {
 		aPropNames = ['appTitle', 'appNamespace'],
 		webappTmpl = this.tmpl(pickConfig(aPropNames), this.config.get('webappRoot'));
 
+		this.log(pickConfig(aPropNames));
+
+		// project root templates
+		this.copy('.', '.eslintrc');
+
 		// webapp root templates
 		webappTmpl('index.html');
 		webappTmpl('manifest.json');
@@ -91,7 +102,6 @@ module.exports = class extends Generator {
 			arguments: [this.config.get('rootViewName')]
 		});
 
-		// eslintrc
 
 	}
 
