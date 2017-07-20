@@ -8,67 +8,67 @@ module.exports = class extends Generator {
     // call super constructor
     super(args, opts);
 
-		// register additional arguments
-		this.argument('appNamespace', {
-			description: 'What\'s your project namespace?' ,
-			required: false
-		});
-		this.argument('appTitle', {
-			description: 'What\'s your app title?',
-			required: false
-		});
+    // register additional arguments
+    this.argument('appNamespace', {
+      description: 'What\'s your project namespace?' ,
+      required: false
+    });
+    this.argument('appTitle', {
+      description: 'What\'s your app title?',
+      required: false
+    });
 
   }
 
-	// ********************************************************* //
-	// run loop: http://yeoman.io/authoring/running-context.html
-	// ******************************************************* //
+  // ********************************************************* //
+  // run loop: http://yeoman.io/authoring/running-context.html
+  // ******************************************************* //
 
-	initializing(){
-		// generate default config
-		this.composeWith('stui5:config', {});
+  initializing(){
+    // generate default config
+    this.composeWith('stui5:config', {});
 
-		// save arguments passed
-		this.config.set(R.pick(['appNamespace', 'appTitle'], this.options));
-	}
+    // save arguments passed
+    this.config.set(R.pick(['appNamespace', 'appTitle'], this.options));
+  }
 
-	prompting() {
+  prompting() {
 
-		// check if a config key has a value
-		var isConfigNil = sKey => R.isNil(this.config.get(sKey));
-		// check if a prompt is required (not required if the prompt is already in config)
-		var isPromptReq = R.pipe(R.prop('name'), isConfigNil);
+    // check if a config key has a value
+    var isConfigNil = sKey => R.isNil(this.config.get(sKey));
+    // check if a prompt is required (not required if the prompt is already in config)
+    var isPromptReq = R.pipe(R.prop('name'), isConfigNil);
 
-		var aPromptIfUnknown = [
-			{
-				type: 'input',
-				name: 'appNamespace',
-				default: slugify(this.appname),
-				message: 'What\'s your project namespace?'
-			},
-			{
-				type: 'input',
-				name: 'appTitle',
-				message: 'What\'s your app title?',
-				default: this.appname //default to current folder name
-			}
-		],
-		// prompt with only those required and those which should always be prompted
-		aPrompts = R.filter(isPromptReq, aPromptIfUnknown);
+    var aPromptIfUnknown = [
+      {
+        type: 'input',
+        name: 'appNamespace',
+        default: slugify(this.appname),
+        message: 'What\'s your project namespace?'
+      },
+      {
+        type: 'input',
+        name: 'appTitle',
+        message: 'What\'s your app title?',
+        default: this.appname //default to current folder name
+      }
+    ],
+    // prompt with only those required and those which should always be prompted
+    aPrompts = R.filter(isPromptReq, aPromptIfUnknown);
 
-		// return promises for the prompts
-		return this.prompt(aPrompts).then((responses) => {
+    // return promises for the prompts
+    return this.prompt(aPrompts).then((responses) => {
 
-			// start by saving all responses to config.
-			this.config.set(responses);
-		});
-	}
+      // start by saving all responses to config.
+      this.config.set(responses);
+    });
+  }
 
   configuring() {
     // TODO check config isn't demanding anything nonsensical
 
     // set base controller path
-		if (this.isConfigTrue('baseController')) {
+    if (this.isConfigTrue('baseController')) {
       // super controller path is the base
       this.config.set('superControllerPath', this.jPath(this.pathify(this.config.get('appNamespace')), 'controller/Base.controller'));
     } else {
@@ -77,29 +77,35 @@ module.exports = class extends Generator {
     }
   }
 
-	writing() {
+  writing() {
 
-		// README
-		this.tmpl({appTitle: this.config.get('appTitle')}, '.', 'README.md');
+    // README
+    this.tmpl({appTitle: this.config.get('appTitle')}, '.', 'README.md');
 
-		// package.json
-		this.tmpl({}, '.', 'package.json');
+    // package.json
+    this.tmpl({}, '.', 'package.json');
 
-		// project root templates
-		this.composeWith('stui5:projectfiles');
+    // project root templates
+    this.composeWith('stui5:projectfiles');
 
-		// webapp root templates
-		this.composeWith('stui5:core');
+    // webapp root templates
+    this.composeWith('stui5:core');
 
-		// view and controller
-		this.composeWith('stui5:view', {
-			arguments: [this.config.get('rootViewName')]
-		});
+    // view and controller
+    this.composeWith('stui5:view', {
+      arguments: [this.config.get('rootViewName')]
+    });
 
-	}
+  }
 
-	end(){
-		// TODO: git init
-	}
+  end(){
+    // git init
+    if(this.isConfigTrue('gitInit')){
+      this.composeWith(require.resolve('generator-git-init/generators/app'), {
+         commit: 'Initial commit by yeoman stui5'
+      });
+    }
+    this.log('Git repository initialised')
+  }
 
 };
