@@ -18,6 +18,25 @@ module.exports = class extends Generator {
 			required: false
 		});
 
+
+		// helper methods
+		this.jPath = R.unapply(R.join('/'));
+  	this.jName = R.unapply(R.join('.'));
+		this.pickConfig = R.flip(R.pick);
+		this.copy = (sDestPath, sName) => {
+			this.fs.copy(
+				this.templatePath(sName),
+				this.destinationPath(this.jPath(sDestPath, sName))
+			);
+		};
+		this.tmpl = R.curry((mProps, sDestPath, sName) => {
+			this.fs.copyTpl(
+				this.templatePath(sName),
+				this.destinationPath(this.jPath(sDestPath, sName)),
+				mProps
+			);
+		});
+
   }
 
 	// ********************************************************* //
@@ -65,6 +84,10 @@ module.exports = class extends Generator {
 	}
 
 	writing() {
+
+		// README
+		this.tpml({appTitle: this.config.get('appTitle')}, '.', 'README.md');
+
 
 		// project root templates
 		this.composeWith('stui5:projectfiles');

@@ -18,6 +18,8 @@ These instructions assume you've installed yo via npm and are running it from th
 
 Generator help: `yo stui5 --help` or `yo stui5:subgen --help` where `subgen` is one of the subgenerators available.
 
+Although you can directly call any sub-generator included in this generator, some of them depend on config that gets set using the top-level app generator.
+
 |Generator:subGenerator  |Command  |Description  
 |--|--|--|
 |stui5  |`yo stui5`        | Generate a new UI5 app from scratch

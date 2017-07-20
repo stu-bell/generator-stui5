@@ -30,7 +30,6 @@ module.exports = class extends Generator {
 
 	writing() {
     // copy project files
-		this.copy('.', 'README.md');
     
     // TODO: check config
 		this.copy('.', '.eslintrc');
