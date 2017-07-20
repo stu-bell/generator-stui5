@@ -22,6 +22,7 @@ module.exports = class extends Generator {
 		// helper methods
 		this.jPath = R.unapply(R.join('/'));
   	this.jName = R.unapply(R.join('.'));
+		this.pickConfig = (mConfig) => R.unapply(R.flip(R.pick)(mConfig));
 		this.tmpl = R.curry((mProps, sDestPath, sName) => {
 			this.fs.copyTpl(
 				this.templatePath(sName),
@@ -80,6 +81,9 @@ module.exports = class extends Generator {
 		jRoot = R.partial(this.jPath, [this.config.get('webappRoot')]),
 		sRootPath = this.config.get('webappRoot'),
 		rootTmpl = this.tmpl(mProps, sRootPath);
+
+		var config = this.pickConfig(this.config.getAll());
+		this.log(config('appTitle', 'gitInit'));
 
 		// index.html
 		rootTmpl('index.html');
