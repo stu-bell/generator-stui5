@@ -97,7 +97,7 @@ module.exports = class extends Generator {
 
 		// view and controller
 		this.composeWith('stui5:view', {
-			viewName: 'app'
+			arguments: [this.config.get('rootViewName')]
 		});
 
 		// eslintrc
