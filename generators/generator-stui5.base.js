@@ -37,5 +37,6 @@ module.exports = class extends Generator {
 			);
 		});
     this.configEq = R.curry((mConfig, value, sKey) => (R.propEq(sKey, value, mConfig)));
+    this.isTrue = R.equals(true);
 	};
 }

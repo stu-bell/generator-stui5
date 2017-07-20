@@ -9,8 +9,9 @@ module.exports = class extends Generator {
 	initializing(){
 		// set default config
 		this.config.defaults({
-			rootViewName: "app",
+			rootViewName: "App",
 			webappRoot: "webapp",
+			baseController: true,
 			gitInit: true,
 			eslint: true
 		});
