@@ -60,7 +60,7 @@ module.exports = class extends Generator {
 
 			// start by saving all responses to config.
 			this.config.set(responses);
-
+		});
 	}
 
 	writing() {

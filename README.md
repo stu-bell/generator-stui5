@@ -1,6 +1,6 @@
-# UI5 Yeoman Generator
-## Super template for UI5
+# Super template for UI5
 
+## UI5 Yeoman Generator
 [Yeoman](http://yeoman.io) is a [Node.js](http://nodejs.org) package for generating code projects from pre-defined templates known as _generators_. This project is a generator for starting [UI5](http://openui5.org) projects.
 
 People have written thousands of yeoman generators, and not just for JavaScript projects. You may find an existing one that suits your needs. See the full list at [yeoman.io](http://yeoman.io/generators/). There are a few UI5 generators (search UI5 in the search field) but none of them were to my taste, hence this one.
@@ -16,11 +16,13 @@ These instructions assume you've installed yo via npm and are running it from th
 
 ## Commands
 
-|Command  |Description  
-|--|--|
-|`yo stui5`        | Generate a new UI5 app from scratch
-|`yo stui5:view <viewName>`   | Add a view to an existing app, where `<viewName>` gets prepended to `.view.xml` for the view name
-|`yo stui5:config` | Generate a default .yo-rc.json configuration file
+Generator help: `yo stui5 --help` or `yo stui5:subgen --help` where `subgen` is one of the subgenerators available.
+
+|Generator:subGenerator  |Command  |Description  
+|--|--|--|
+|stui5  |`yo stui5`        | Generate a new UI5 app from scratch
+|stui5:view  |`yo stui5:view <viewName>`   | Add a view to an existing app, where `<viewName>` gets prepended to `.view.xml` for the view name
+|stui5:config  |`yo stui5:config` | Generate a default .yo-rc.json configuration file
 
 ## Configuration
 
