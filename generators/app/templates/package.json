@@ -1,0 +1,62 @@
+{
+  "name": "template-ui5-ci-project",
+  "private": true,
+  "version": "1.0.0",
+  "devDependencies": {
+    "eslint": "^3.14.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-qunit": "^2.0.0",
+    "grunt-http-download": "^0.1.0",
+    "grunt-if": "^0.1.5",
+    "grunt-json-generator": "^0.1.0",
+    "grunt-nwabap-ui5uploader": "^0.1.18",
+    "grunt-openui5": "^0.12.0",
+    "grunt-ui5-version": "^1.0.0",
+    "grunt-xml-and-xsd-validator": "^1.0.2",
+    "grunt-zip": "^0.17.1",
+    "gruntify-eslint": "^3.1.0",
+    "load-grunt-tasks": "^3.5.2"
+  },
+  "bluefin": {
+    "ui5-name": "sap/ui/demo/cart",
+    "ui5-version": "1.44.17",
+    "ui5-type": "sdk",
+    "abap-package": "$TMP",
+    "abap-bsp": "ZSAMPLE_APP",
+    "abap-bsp-text": "Sample Applicaton",
+    "abap-hostname": "https://gblonnw22.bluefinsolutions.com",
+    "qunit-tests": [
+      {
+        "name": "test",
+        "urls": [
+          "http://localhost:8050/test/opaTestsWithComponent.qunit.html",
+          "http://localhost:8050/test/opaTestsWithGherkin.qunit.html",
+          "http://localhost:8050/test/opaTestsWithGherkinAndComponent.qunit.html",
+          "http://localhost:8050/test/opaTestsWithIFrame.qunit.html"
+        ]
+      },
+      {
+        "name": "unit",
+        "urls": [
+          "http://localhost:8050/test/unit/unitTests.qunit.html",
+          "http://localhost:8050/test/integration/opaTestsWithComponent.qunit.html",
+          "http://localhost:8050/test/integration/opaTestsWithGherkin.qunit.html",
+          "http://localhost:8050/test/integration/opaTestsWithGherkinAndComponent.qunit.html",
+          "http://localhost:8050/test/integration/opaTestsWithIFrame.qunit.html"
+        ]
+      },
+      {
+        "name": "integration",
+        "urls": [
+          "http://localhost:8050/test/integration/opaTestsWithComponent.qunit.html",
+          "http://localhost:8050/test/integration/opaTestsWithGherkin.qunit.html",
+          "http://localhost:8050/test/integration/opaTestsWithGherkinAndComponent.qunit.html",
+          "http://localhost:8050/test/integration/opaTestsWithIFrame.qunit.html"
+        ]
+      }
+    ]
+  }
+}

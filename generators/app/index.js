@@ -82,6 +82,9 @@ module.exports = class extends Generator {
 		// README
 		this.tmpl({appTitle: this.config.get('appTitle')}, '.', 'README.md');
 
+		// package.json
+		this.tmpl({}, '.', 'package.json');
+
 		// project root templates
 		this.composeWith('stui5:projectfiles');
 
