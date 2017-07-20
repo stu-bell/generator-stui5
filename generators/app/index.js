@@ -18,24 +18,6 @@ module.exports = class extends Generator {
 			required: false
 		});
 
-
-		// helper methods
-		this.jPath = R.unapply(R.join('/'));
-  	this.jName = R.unapply(R.join('.'));
-		this.pickConfig = R.flip(R.pick);
-		this.copy = (sDestPath, sName) => {
-			this.fs.copy(
-				this.templatePath(sName),
-				this.destinationPath(this.jPath(sDestPath, sName))
-			);
-		};
-		this.tmpl = R.curry((mProps, sDestPath, sName) => {
-			this.fs.copyTpl(
-				this.templatePath(sName),
-				this.destinationPath(this.jPath(sDestPath, sName)),
-				mProps
-			);
-		});
   }
 
 	// ********************************************************* //
@@ -83,24 +65,17 @@ module.exports = class extends Generator {
 	}
 
 	writing() {
-		var pickConfig = this.pickConfig(this.config.getAll()),
-		aPropNames = ['appTitle', 'appNamespace'],
-		webappTmpl = this.tmpl(pickConfig(aPropNames), this.config.get('webappRoot'));
 
 		// project root templates
 		this.composeWith('stui5:projectfiles');
 
 		// webapp root templates
-		webappTmpl('index.html');
-		webappTmpl('manifest.json');
-		webappTmpl('Component.js');
-
+		this.composeWith('stui5:core');
 
 		// view and controller
 		this.composeWith('stui5:view', {
 			arguments: [this.config.get('rootViewName')]
 		});
-
 
 	}
 
