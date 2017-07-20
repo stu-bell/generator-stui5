@@ -2,10 +2,15 @@ var Generator = require('yeoman-generator'),
 R = require('ramda');
 
 module.exports = class extends Generator {
+	// ********************************************************* //
+	// run loop: http://yeoman.io/authoring/running-context.html
+	// ******************************************************* //
+
 	initializing(){
 		// set default config
 		this.config.defaults({
 			rootViewName: "app",
+			webappRoot: "webapp",
 			gitInit: true,
 			eslint: true
 		});

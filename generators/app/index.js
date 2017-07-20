@@ -65,15 +65,16 @@ module.exports = class extends Generator {
 
 	writing() {
 		// index.html
-		var sFilePath = 'index.html';
+		var sName = 'index.html',
+		sFullPath = this.jPath(this.config.get('webappRoot'), sName);
 		this.fs.copyTpl(
-			this.templatePath(sFilePath),
-			this.destinationPath(sFilePath),
+			this.templatePath(sName),
+			this.destinationPath(sFullPath),
 			{ title: this.config.get('appTitle'),
 				namespace: this.config.get('appNameSpace'),
 			}
 		);
-		this.log('Copied ', sFilePath);
+		this.log('Copied ', sFullPath);
 
 		// manifest.json
 
@@ -92,4 +93,10 @@ module.exports = class extends Generator {
 		// TODO: git init and .gitignore
 	}
 
+	// ********************************************************* //
+	// helpers
+	// ******************************************************* //
+
+  this.jPath = R.unapply(R.join('/'));
+  this.jName = R.unapply(R.join('.'));
 };

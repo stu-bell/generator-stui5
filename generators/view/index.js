@@ -2,6 +2,12 @@ var Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
 
+
+	// ********************************************************* //
+	// constructor
+	// ******************************************************* //
+
+
   constructor(args, opts) {
     // call super constructor
     super(args, opts);
@@ -16,18 +22,26 @@ module.exports = class extends Generator {
 			required: false,
 			default: this.options.viewName
 		});
+    this.argument('webappRoot', {
+      description: 'Path to the root folder of webapp',
+      default: this.config.get('webappRoot')
+    });
   }
+
+	// ********************************************************* //
+	// run loop: http://yeoman.io/authoring/running-context.html
+	// ******************************************************* //
 
 	prompting(){
 		// TODO: prompt for any missing options not passed through options - although not actually needed becuase it'll complain if you don't supply required arguments
 	}
 
 	writing() {
-		// XML view
-		var sFilePath = 'view/',
-			sFileName = this.options.viewName,
-			sFileExtension = '.view.xml',
-			sFullName = sFilePath + sFileName + sFileExtension;
+    // XML view
+		var
+      sPath = this.jPath(this.options.webappRoot, 'view'),
+      sName = this.jName(this.options.viewName, 'view.xml'),
+      sFullPath = this.jPath(sPath, sName);
 		this.fs.copyTpl(
 			this.templatePath('template.view.xml'),
 			this.destinationPath(sFullName),
@@ -37,4 +51,13 @@ module.exports = class extends Generator {
 
 		// TODO: JS controller
 	}
+
+
+	// ********************************************************* //
+	// helpers
+	// ******************************************************* //
+
+  this.jPath = R.unapply(R.join('/'));
+  this.jName = R.unapply(R.join('.'));
+
 };
