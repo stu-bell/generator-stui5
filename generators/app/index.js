@@ -86,7 +86,7 @@ module.exports = class extends Generator {
 	writing() {
 
 		// README
-		this.tpml({appTitle: this.config.get('appTitle')}, '.', 'README.md');
+		this.tmpl({appTitle: this.config.get('appTitle')}, '.', 'README.md');
 
 
 		// project root templates
