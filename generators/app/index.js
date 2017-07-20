@@ -17,6 +17,13 @@ module.exports = class extends Generator {
 			description: 'What\'s your app title?',
 			required: false
 		});
+
+		// options
+		this.option('proceedWithConfig', {
+			desc: 'Proceed with yo-rc config without asking',
+			alias: 'p',
+			type: Boolean
+		})
   }
 
 	// ********************************************************* //
@@ -28,7 +35,7 @@ module.exports = class extends Generator {
 		this.composeWith('stui5:config', {});
 
 		// save arguments passed
-		this.config.set(R.pick(['namespace', 'title'], this.options));
+		this.config.set(R.pick(['namespace', 'title', 'proceedWithConfig'], this.options));
 	}
 
 	prompting() {
@@ -50,9 +57,7 @@ module.exports = class extends Generator {
 				name: 'title',
 				message: 'What\'s your app title?',
 				default: this.appname //default to current folder name
-			}
-		],
-		aPromptAlways = [
+			},
 			{
 				type: 'confirm',
 				name: 'proceedWithConfig',
@@ -60,7 +65,7 @@ module.exports = class extends Generator {
 			}
 		],
 		// prompt with only those required and those which should always be prompted
-		aPrompts = R.concat(R.filter(isPromptReq, aPromptIfUnknown), aPromptAlways);
+		aPrompts = R.filter(isPromptReq, aPromptIfUnknown);
 
 		// return promises for the prompts
 		return this.prompt(aPrompts).then((responses) => {
