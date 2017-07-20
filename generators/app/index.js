@@ -22,7 +22,14 @@ module.exports = class extends Generator {
 		// helper methods
 		this.jPath = R.unapply(R.join('/'));
   	this.jName = R.unapply(R.join('.'));
-
+		this.jRoot = R.partial(this.jPath, [this.config.get.bind(this, 'webappRoot')]);
+		this.tmpl = (sFrom, sTo, mProps) => {
+			this.fs.copyTpl(
+				this.templatePath(sFrom),
+				this.destinationPath(sTo),
+				mProps
+			);
+		};
   }
 
 	// ********************************************************* //
@@ -70,18 +77,11 @@ module.exports = class extends Generator {
 	}
 
 	writing() {
+		var mProps = R.pick(['appTitle', 'appNamespace'], this.config.getAll());
 		// index.html
 		var sName = 'index.html',
-		sFullPath = this.jPath(this.config.get('webappRoot'), sName);
-		this.fs.copyTpl(
-			this.templatePath(sName),
-			this.destinationPath(sFullPath),
-			{ title: this.config.get('appTitle'),
-				namespace: this.config.get('appNameSpace'),
-			}
-		);
-		this.log('Copied ', sFullPath);
-
+		sFullPath = this.jRoot(sName);
+		this.tmpl(sName, sFullPath, mProps)
 		// manifest.json
 
 		// Component.js
