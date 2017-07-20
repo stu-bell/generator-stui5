@@ -10,8 +10,18 @@ sap.ui.define([
 	*/
 	return Controller.extend("<%= appNamespace %>.controller.<%= controllerName %>", {
 
-		debug: function () {
-			debugger;
-		}
+	// ********************************************************* //
+	// lifecycle
+	// ******************************************************* //
+
+	/**
+	 * Runs on Controller "init" event
+	 * @return   {[type]}
+ 	 * @memberof <%= controllerName %>
+	 */
+	onInit: function () {
+		sap.m.MessageToast.show('Good Morning!! :)');
+	},
+
 	});
 });

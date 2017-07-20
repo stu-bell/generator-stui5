@@ -3,6 +3,7 @@
 	displayBlock="true"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m">
-	<Text text="{i18n>blank.title}" />
-	<Button press="debug" />
+
+	<Text text="Hello! :)" />
+
 </mvc:View>
