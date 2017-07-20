@@ -87,15 +87,14 @@ module.exports = class extends Generator {
 		aPropNames = ['appTitle', 'appNamespace'],
 		webappTmpl = this.tmpl(pickConfig(aPropNames), this.config.get('webappRoot'));
 
-		this.log(pickConfig(aPropNames));
-
 		// project root templates
-		this.copy('.', '.eslintrc');
+		this.composeWith('stui5:projectfiles');
 
 		// webapp root templates
 		webappTmpl('index.html');
 		webappTmpl('manifest.json');
 		webappTmpl('Component.js');
+
 
 		// view and controller
 		this.composeWith('stui5:view', {
