@@ -19,13 +19,13 @@ module.exports = class extends Generator {
 		webappTmpl('manifest.json');
 		webappTmpl('Component.js');
 
+		// i18n
+		propsTmpl(this.jPath(sRootPath, "i18n"), 'messageBundle.properties');
+
 		// base controller
 		if (this.isConfigTrue('baseController')) {
 			this.log('baseController true')
 			propsTmpl(this.jPath(sRootPath, "controller"), 'Base.controller.js');
-		} else {
-			this.log('baseController FALSE')
-
 		}
 
 	}
