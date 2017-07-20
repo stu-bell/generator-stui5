@@ -1,4 +1,4 @@
-var Generator = require('yeoman-generator'),
+var Generator = require('../generator-stui5-base'),
 R = require('ramda');
 
 module.exports = class extends Generator {
@@ -53,6 +53,7 @@ module.exports = class extends Generator {
 	// ******************************************************* //
 
 	prompting(){
+    this.hello()
 		// TODO: prompt for any missing options not passed through options - although not actually needed becuase it'll complain if you don't supply required arguments
 	}
 
