@@ -79,16 +79,16 @@ module.exports = class extends Generator {
 		var mProps = R.pick(['appTitle', 'appNamespace'], this.config.getAll()),
 		jRoot = R.partial(this.jPath, [this.config.get('webappRoot')]),
 		sRootPath = this.config.get('webappRoot'),
-		sIndexName = 'index.html',
-		sComponentName = 'Component.js',
-		sManifestName = 'manifest.json';
+		rootTmpl = this.tmpl(mProps, sRootPath);
 
 		// index.html
-		this.tmpl(mProps, sRootPath, sIndexName);
+		rootTmpl('index.html');
 
 		// manifest.json
+		rootTmpl('manifest.json');
 
 		// Component.js
+		rootTmpl('Component.js');
 
 		// view and controller
 		this.composeWith('stui5:view', {
