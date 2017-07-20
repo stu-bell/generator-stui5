@@ -17,13 +17,6 @@ module.exports = class extends Generator {
 			description: 'What\'s your app title?',
 			required: false
 		});
-
-		// options
-		this.option('proceedWithConfig', {
-			desc: 'Proceed with yo-rc config without asking',
-			alias: 'p',
-			type: Boolean
-		})
   }
 
 	// ********************************************************* //
@@ -35,7 +28,7 @@ module.exports = class extends Generator {
 		this.composeWith('stui5:config', {});
 
 		// save arguments passed
-		this.config.set(R.pick(['namespace', 'title', 'proceedWithConfig'], this.options));
+		this.config.set(R.pick(['namespace', 'title'], this.options));
 	}
 
 	prompting() {
@@ -57,11 +50,6 @@ module.exports = class extends Generator {
 				name: 'title',
 				message: 'What\'s your app title?',
 				default: this.appname //default to current folder name
-			},
-			{
-				type: 'confirm',
-				name: 'proceedWithConfig',
-				message: 'Are you happy to proceed with the exsitng yo-rc config?',
 			}
 		],
 		// prompt with only those required and those which should always be prompted
@@ -73,15 +61,6 @@ module.exports = class extends Generator {
 			// start by saving all responses to config.
 			this.config.set(responses);
 
-			// delete responses not needed for config
-			this.config.delete('proceedWithConfig');
-
-			// finish early if they want to edit the config
-			if (responses.proceedWithConfig === false) {
-				this.log('Modify your .yo-rc.json config file then re-run the generator');
-				// TODO finish early - Do we really need this option at all?/
-			}
-		});
 	}
 
 	writing() {
