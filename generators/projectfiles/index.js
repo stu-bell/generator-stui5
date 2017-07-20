@@ -17,12 +17,6 @@ module.exports = class extends Generator {
   	this.jName = R.unapply(R.join('.'));
 		this.pickConfig = R.flip(R.pick);
     this.configEq = R.curry((mConfig, value, sKey) => (R.propEq(sKey, value, mConfig)));
-		this.copy = (sDestPath, sName) => {
-			this.fs.copy(
-				this.templatePath(sName),
-				this.destinationPath(this.jPath(sDestPath, sName))
-			);
-		};
   }
 
 	// ********************************************************* //
@@ -31,7 +25,13 @@ module.exports = class extends Generator {
 
 	writing() {
     var isTrue = this.configEq(this.config.getAll(), true),
-    rootCopy = this.copy('.');
+    rootCopy = sName => {
+      this.fs.copy(
+        this.templatePath(sName),
+        this.destinationPath(sName)
+      )
+    };
+
 
     // copy project files
     // eslint

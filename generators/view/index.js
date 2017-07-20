@@ -46,6 +46,7 @@ module.exports = class extends Generator {
 				mProps
 			);
 		});
+  }
 
 	// ********************************************************* //
 	// run loop: http://yeoman.io/authoring/running-context.html
@@ -62,7 +63,7 @@ module.exports = class extends Generator {
     sControllerPath = this.jPath(this.options.webappRoot, 'controller', this.jName(this.options.controllerName, 'controller.js')),
     pickConfig = this.flipPick(this.config.getAll()),
     pickOptions = this.flipPick(this.options),
-		mProps = R.merge(pickConfig(['appNamespace'), pickOptions(["controllerName"]), {baseController: "sap/ui/core/mvc/Controller"});
+		mProps = R.mergeAll([pickConfig(['appNamespace']), pickOptions(["controllerName"]), {baseController: "sap/ui/core/mvc/Controller"}]);
 
     // XML view
     this.tmplFT(mProps, 'template.view.xml', sViewPath);
