@@ -1,4 +1,4 @@
-var Generator = require('yeoman-generator'),
+var Generator = require('../generator-stui5.base'),
 R = require('ramda');
 
 module.exports = class extends Generator {

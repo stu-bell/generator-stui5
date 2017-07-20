@@ -1,4 +1,4 @@
-var Generator = require('yeoman-generator'),
+var Generator = require('../generator-stui5.base'),
 R = require('ramda'),
 slugify = require('underscore.string/slugify');
 
@@ -16,25 +16,6 @@ module.exports = class extends Generator {
 		this.argument('appTitle', {
 			description: 'What\'s your app title?',
 			required: false
-		});
-
-
-		// helper methods
-		this.jPath = R.unapply(R.join('/'));
-  	this.jName = R.unapply(R.join('.'));
-		this.pickConfig = R.flip(R.pick);
-		this.copy = (sDestPath, sName) => {
-			this.fs.copy(
-				this.templatePath(sName),
-				this.destinationPath(this.jPath(sDestPath, sName))
-			);
-		};
-		this.tmpl = R.curry((mProps, sDestPath, sName) => {
-			this.fs.copyTpl(
-				this.templatePath(sName),
-				this.destinationPath(this.jPath(sDestPath, sName)),
-				mProps
-			);
 		});
 
   }
@@ -102,7 +83,7 @@ module.exports = class extends Generator {
 	}
 
 	end(){
-		// TODO: git init 
+		// TODO: git init
 	}
 
 };

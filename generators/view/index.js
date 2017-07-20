@@ -1,13 +1,11 @@
-var Generator = require('../generator-stui5-base'),
+var Generator = require('../generator-stui5.base'),
 R = require('ramda');
 
 module.exports = class extends Generator {
 
-
 	// ********************************************************* //
 	// constructor
 	// ******************************************************* //
-
 
   constructor(args, opts) {
     // call super constructor
@@ -28,24 +26,6 @@ module.exports = class extends Generator {
       default: this.config.get('webappRoot')
     });
 
-
-		// helper methods
-		this.jPath = R.unapply(R.join('/'));
-  	this.jName = R.unapply(R.join('.'));
-		this.flipPick = R.flip(R.pick);
-		this.copy = (sDestPath, sName) => {
-			this.fs.copy(
-				this.templatePath(sName),
-				this.destinationPath(this.jPath(sDestPath, sName))
-			);
-		};
-		this.tmplFT = R.curry((mProps, sFrom, sTo) => {
-			this.fs.copyTpl(
-				this.templatePath(sFrom),
-				this.destinationPath(sTo),
-				mProps
-			);
-		});
   }
 
 	// ********************************************************* //
@@ -53,7 +33,6 @@ module.exports = class extends Generator {
 	// ******************************************************* //
 
 	prompting(){
-    this.hello()
 		// TODO: prompt for any missing options not passed through options - although not actually needed becuase it'll complain if you don't supply required arguments
 	}
 
