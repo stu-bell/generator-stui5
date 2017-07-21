@@ -88,10 +88,8 @@ module.exports = class extends Generator {
     // webapp root templates
     this.composeWith('stui5:core');
 
-    // view and controller
-    this.composeWith('stui5:view', {
-      arguments: [this.config.get('rootViewName')]
-    });
+    // floor plan
+    this.composeWith('stui5:masterDetail'); // TODO check config for singlePage or  Master Detail
 
   }
 

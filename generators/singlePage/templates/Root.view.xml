@@ -1,0 +1,6 @@
+<mvc:View id="Root"
+	displayBlock="true"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
+	<App id="app" />
+</mvc:View>

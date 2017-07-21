@@ -24,7 +24,7 @@
   },
   "sap.ui5": {
     "_version": "1.1.0",
-  "rootView": "<%= appNamespace %>.view.<%= rootViewName %>",
+    "rootView": "<%= appNamespace %>.view.Root",
     "dependencies": {
       "minUI5Version": "1.30",
       "libs": {
@@ -50,21 +50,21 @@
         "viewType": "XML",
         "viewPath" : "<%= appNamespace %>.view",
         "clearTarget" : false,
-        "controlId": "<%= rootViewName %>",
+        "controlId": "app",
         "controlAggregation": "pages"
       },
       "routes": [
         {
           "pattern": "",
-          "name": "Root",
+          "name": "Initial",
           "target": [
-            "Root"
+            "Initial"
           ]
         }
       ],
       "targets": {
-        "Root": {
-          "viewName": "<%= rootViewName %>",
+        "Initial": {
+          "viewName": "<%= firstViewName %>",
           "viewLevel": 1
         }
       }

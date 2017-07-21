@@ -16,7 +16,6 @@ module.exports = class extends Generator {
 
 		// copy core webapp files
 		webappTmpl('index.html');
-		webappTmpl('manifest.json');
 		webappTmpl('Component.js');
 
 		// i18n

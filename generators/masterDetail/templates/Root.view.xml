@@ -1,0 +1,6 @@
+<mvc:View id="Root"
+	displayBlock="true"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
+	<SplitApp id="app" mode="StretchCompressMode" />
+</mvc:View>
