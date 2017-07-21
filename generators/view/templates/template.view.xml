@@ -1,9 +1,8 @@
-<mvc:View
+<mvc:View id="<%= viewName %>"
 	controllerName="<%= appNamespace %>.controller.<%= controllerName %>"
 	displayBlock="true"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m">
 
-	<Text text="Hello! :)" />
 
 </mvc:View>

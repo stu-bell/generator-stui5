@@ -9,6 +9,7 @@ module.exports = class extends Generator {
 	initializing(){
 		// set default config
 		this.config.defaults({
+			bootstrap: '../../resources/sap-ui-core.js',
 			rootViewName: "App",
 			webappRoot: "webapp",
 			baseController: true,

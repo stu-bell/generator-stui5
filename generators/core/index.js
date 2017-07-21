@@ -9,7 +9,7 @@ module.exports = class extends Generator {
 
 	writing() {
 		var pickConfig = this.flipPick(this.config.getAll()),
-		aPropNames = ['appTitle', 'appNamespace', 'superControllerPath', 'rootViewName'],
+		aPropNames = ['bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'rootViewName'],
 		propsTmpl = this.tmpl(pickConfig(aPropNames)),
 		sRootPath = this.config.get('webappRoot'),
 		webappTmpl = propsTmpl(sRootPath);

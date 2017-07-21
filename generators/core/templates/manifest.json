@@ -50,7 +50,7 @@
         "viewType": "XML",
         "viewPath" : "<%= appNamespace %>.view",
         "clearTarget" : false,
-        "controlId": "app",
+        "controlId": "<%= rootViewName %>",
         "controlAggregation": "pages"
       },
       "routes": [
