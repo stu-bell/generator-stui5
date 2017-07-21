@@ -20,7 +20,7 @@ sap.ui.define([
  	 * @memberof <%= controllerName %>
 	 */
 	onInit: function () {
-		sap.m.MessageToast.show('{i18n>hello}');
+		sap.m.MessageToast.show("Hello!! :)");
 	},
 
 	});
