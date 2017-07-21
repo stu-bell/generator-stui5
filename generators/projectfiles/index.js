@@ -15,8 +15,13 @@ module.exports = class extends Generator {
       )
     };
 
-
     // copy project files
+
+		// package.json
+		if (this.isConfigTrue('packageJson')) {
+			rootCopy('package.json')
+		}
+
     // eslint
     if(this.isConfigTrue('eslint')){
       rootCopy('.eslintrc');
