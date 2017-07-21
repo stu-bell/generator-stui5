@@ -89,7 +89,7 @@ module.exports = class extends Generator {
     this.composeWith('stui5:core');
 
     // floor plan
-    this.composeWith('stui5:singlePage'); // TODO Master Detail
+    this.composeWith('stui5:masterDetail'); // TODO check config for singlePage or  Master Detail
 
   }
 
