@@ -1,5 +1,7 @@
 # Super template for UI5
 
+Video demo: [MUD show-n-tell](https://www.youtube.com/watch?v=5RFkG-jEETI&list=PLfctWmgNyOIedb1RLMXyD87Q5Ch_Soub-&index=14)
+
 ## UI5 Yeoman Generator
 [Yeoman](http://yeoman.io) is a [Node.js](http://nodejs.org) package for generating code projects from pre-defined templates known as _generators_. This project is a generator for starting [UI5](http://openui5.org) projects.
 
