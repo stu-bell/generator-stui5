@@ -27,9 +27,6 @@ module.exports = class extends Generator {
 
   initializing(){
 
-    this.log('4x3 = ', S.multiply(3, 4));
-    this.log('2x3 = ', S.double(3));
-
     // generate default config
     this.composeWith('stui5:config', {});
 
@@ -73,7 +70,7 @@ module.exports = class extends Generator {
     // TODO check config isn't demanding anything nonsensical
 
     // set base controller path
-    if (this.isConfigTrue('baseController')) {
+    if (S.isConfigTrue('baseController')) {
       // super controller path is the base
       this.config.set('superControllerPath', this.jPath(this.pathify(this.config.get('appNamespace')), 'controller/Base.controller'));
     } else {

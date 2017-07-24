@@ -10,10 +10,6 @@ module.exports = class extends Generator {
 	// ********************************************************* //
   // helper methods
 	// ******************************************************* //
-  // TODO: jsdoc all of these!
-    this.pathify = R.replace(/\./g, '/');
-		this.jPath = R.unapply(R.join('/'));
-  	this.jName = R.unapply(R.join('.'));
 		this.copy = (sDestPath, sName) => {
 			this.fs.copy(
 				this.templatePath(sName),
@@ -42,9 +38,16 @@ module.exports = class extends Generator {
 				mProps
 			);
 		});
+
+
+    // TODO: migrate these to helper class
+    this.pathify = R.replace(/\./g, '/');
+    this.jPath = R.unapply(R.join('/'));
+    this.jName = R.unapply(R.join('.'));
     this.configEq = R.curry((mConfig, value, sKey) => (R.propEq(sKey, value, mConfig)));
     this.flipPick = R.flip(R.pick);
     this.isConfig = R.curry((value, sKey) => R.equals(value, this.config.get(sKey)));
     this.isConfigTrue = this.isConfig(true);
+
 	};
 }
