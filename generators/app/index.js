@@ -1,4 +1,5 @@
 var Generator = require('../generator-stui5.base'),
+S = require('../scb-helper'),
 R = require('ramda'),
 slugify = require('underscore.string/slugify');
 
@@ -25,6 +26,10 @@ module.exports = class extends Generator {
   // ******************************************************* //
 
   initializing(){
+
+    this.log('4x3 = ', S.multiply(3, 4));
+    this.log('2x3 = ', S.double(3));
+
     // generate default config
     this.composeWith('stui5:config', {});
 
