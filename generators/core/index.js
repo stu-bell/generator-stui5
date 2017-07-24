@@ -10,7 +10,7 @@ module.exports = class extends Generator {
 
 	writing() {
 		var pickConfig = S.flipPick(this.config.getAll()),
-		aPropNames = ['bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'rootViewName'],
+		aPropNames = ['bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'rootViewName', 'baseControllerBody'],
 		propsTmpl = this.tmpl(pickConfig(aPropNames)),
 		sRootPath = this.config.get('webappRoot'),
 		webappTmpl = propsTmpl(sRootPath);
@@ -24,7 +24,6 @@ module.exports = class extends Generator {
 
 		// base controller
 		if (S.isConfigTrue('baseController')) {
-			this.log('baseController true')
 			propsTmpl(S.jPath(sRootPath, "controller"), 'Base.controller.js');
 		}
 
