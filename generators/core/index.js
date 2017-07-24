@@ -9,7 +9,7 @@ module.exports = class extends Generator {
 	// ******************************************************* //
 
 	writing() {
-		var pickConfig = this.flipPick(this.config.getAll()),
+		var pickConfig = S.flipPick(this.config.getAll()),
 		aPropNames = ['bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'rootViewName'],
 		propsTmpl = this.tmpl(pickConfig(aPropNames)),
 		sRootPath = this.config.get('webappRoot'),
@@ -23,18 +23,18 @@ module.exports = class extends Generator {
 		propsTmpl(S.jPath(sRootPath, "i18n"), 'messageBundle.properties');
 
 		// base controller
-		if (this.isConfigTrue('baseController')) {
+		if (S.isConfigTrue('baseController')) {
 			this.log('baseController true')
 			propsTmpl(S.jPath(sRootPath, "controller"), 'Base.controller.js');
 		}
 
 		// formatter
-		if (this.isConfigTrue('formatter')) {
+		if (S.isConfigTrue('formatter')) {
 			this.copy(S.jPath(sRootPath, 'util'), 'formatter.js');
 		}
 
 		// mock server
-		if (this.isConfigTrue('mockServer')) {
+		if (S.isConfigTrue('mockServer')) {
 			this.copy(S.jPath(sRootPath, 'util'), 'MockServer.js');
 		}
 

@@ -102,7 +102,7 @@ module.exports = class extends Generator {
 
   end(){
     // git init
-    if(this.isConfigTrue('gitInit')){
+    if(S.isConfigTrue('gitInit')){
       this.composeWith(require.resolve('generator-git-init/generators/app'), {
          commit: 'Initial commit by yeoman stui5'
       });

@@ -11,7 +11,7 @@ module.exports = class extends Generator {
 	writing() {
 		var
 		aPropNames = ['bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'firstViewName'],
-		mProps = this.flipPick(this.config.getAll(), aPropNames),
+		mProps = S.flipPick(this.config.getAll(), aPropNames),
 		sRootPath = this.config.get('webappRoot');
 
 		// copy core webapp files
