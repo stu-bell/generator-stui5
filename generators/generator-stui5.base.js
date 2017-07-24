@@ -1,50 +1,73 @@
 var Generator = require('yeoman-generator'),
+S = require('./scb-helper'),
 R = require('ramda');
 
+/**
+ * Adds helper methods to yeoman generator class
+ * @class stui5-generator-base
+ */
 module.exports = class extends Generator {
 
   constructor(args, opts) {
     // call super constructor
     super(args, opts);
 
-	// ********************************************************* //
-  // helper methods
-	// ******************************************************* //
-  // TODO: jsdoc all of these!
-    this.pathify = R.replace(/\./g, '/');
-		this.jPath = R.unapply(R.join('/'));
-  	this.jName = R.unapply(R.join('.'));
-		this.copy = (sDestPath, sName) => {
-			this.fs.copy(
-				this.templatePath(sName),
-				this.destinationPath(this.jPath(sDestPath, sName))
-			);
-		};
-    this.copyFT = (sFrom, sTo) => {
+    // ********************************************************* //
+    // helper methods
+    // ******************************************************* //
+
+    /**
+     * Wrapper to fs.copy: Copy relative to this.templatePath and this.destinationPath
+     * @param    {string} sFrom path to file copy. Path relative to this.templatePath()
+     * @param    {string} sTo path to paste file. Path relative to this.destinationPath()
+     * @see yeoman-generator: fs.copy
+     * @memberof stui5-generator-base
+     */
+    this.copyFT = R.curry((sFrom, sTo) => {
       this.fs.copy(
         this.templatePath(sFrom),
         this.destinationPath(sTo)
       );
-    };
+    });
 
-		this.tmpl = R.curry((mProps, sDestPath, sName) => {
-			this.fs.copyTpl(
-				this.templatePath(sName),
-				this.destinationPath(this.jPath(sDestPath, sName)),
-				mProps
-			);
-		});
+    /**
+     * Wrapper to fs.copyTpl: Copy template and fill placeholders.
+     * @param {map} mProps Map of placeholder keys and values. Values will replace corresponding template placeholders
+     * @param {string} sFrom path to file to copy. Path relative to this.templatePath()
+     * @param {string} sTo path to paste file. Path relative to this.destinationPath()
+     * @see yeoman-generator: fs.copyTpl
+     * @memberof stui5-generator-base
+     */
+    this.tmplFT = R.curry((mProps, sFrom, sTo) => {
+      this.fs.copyTpl(
+        this.templatePath(sFrom),
+        this.destinationPath(sTo),
+        mProps
+      );
+    });
 
-		this.tmplFT = R.curry((mProps, sFrom, sTo) => {
-			this.fs.copyTpl(
-				this.templatePath(sFrom),
-				this.destinationPath(sTo),
-				mProps
-			);
-		});
-    this.configEq = R.curry((mConfig, value, sKey) => (R.propEq(sKey, value, mConfig)));
-    this.flipPick = R.flip(R.pick);
-    this.isConfig = R.curry((value, sKey) => R.equals(value, this.config.get(sKey)));
-    this.isConfigTrue = this.isConfig(true);
-	};
+    /**
+     * Wrapper to this.copyFT: assumes file sName is at this.templatePath() and will copied to sDestPath, relative to this.destinationPath, without changing the filename.
+     * @param {string} sDestPath Path to paste file (excluding filename) relative to this.destinationPath()
+     * @param {string} sName Name of the file at this.templatePath(). Will be used to name the destination file
+     * @memberof stui5-generator-base
+     * @see this.copyFT
+     */
+    this.copy = R.curry((sDestPath, sName) => {
+      this.copyFT(sName, S.jPath(sDestPath, sName));
+    });
+
+    /**
+     * Wrapper to this.tmplFT: assumes file sName is at this.templatePath() and will copied to sDestPath, relative to this.destinationPath, without changing the filename.
+     * @param {map} mProps map of placholder keys and values. Values will replace corresponding template placeholders
+     * @param {string} sDestPath Path to paste file (excluding filename) relative to this.destinationPath()
+     * @param {string} sName Name of the file at this.templatePath(). Will be used to name the destination file
+     * @memberof stui5-generator-base
+     * @see this.tmplFT
+     */
+    this.tmpl = R.curry((mProps, sDestPath, sName) => {
+      this.tmplFT(mProps, sName, S.jPath(sDestPath, sName));
+    });
+
+  };
 }

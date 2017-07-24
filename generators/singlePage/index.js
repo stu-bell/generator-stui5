@@ -1,4 +1,5 @@
 var Generator = require('../generator-stui5.base'),
+S = require('../scb-helper'),
 R = require('ramda');
 
 module.exports = class extends Generator {
@@ -10,14 +11,14 @@ module.exports = class extends Generator {
 	writing() {
 		var
 		aPropNames = ['bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'firstViewName'],
-		mProps = this.flipPick(this.config.getAll(), aPropNames),
+		mProps = S.flipPick(this.config.getAll(), aPropNames),
 		sRootPath = this.config.get('webappRoot');
 
 		// copy core webapp files
 		this.tmpl(mProps, sRootPath, 'manifest.json');
 
 		// copy Rootview
-		this.tmpl(mProps, this.jPath(sRootPath, 'view'), 'Root.view.xml')
+		this.tmpl(mProps, S.jPath(sRootPath, 'view'), 'Root.view.xml')
 
 		// first view and controller via stui5:view
 		this.composeWith('stui5:view', {

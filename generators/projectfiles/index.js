@@ -1,4 +1,5 @@
 var Generator = require('../generator-stui5.base'),
+S = require('../scb-helper'),
 R = require('ramda');
 
 module.exports = class extends Generator {
@@ -18,27 +19,27 @@ module.exports = class extends Generator {
     // copy project files
 
 		// package.json
-		if (this.isConfigTrue('packageJson')) {
+		if (S.isConfigTrue('packageJson')) {
 			rootCopy('package.json')
 		}
 
     // eslint
-    if(this.isConfigTrue('eslint')){
+    if(S.isConfigTrue('eslint')){
       rootCopy('.eslintrc');
     }
 
     // gitignore
-    if (this.isConfigTrue('gitInit')) {
+    if (S.isConfigTrue('gitInit')) {
       rootCopy('.gitignore');
     }
 
     // ci
-    if (this.isConfigTrue('ci')) {
+    if (S.isConfigTrue('ci')) {
       rootCopy('.gitlab-ci.yml');
     }
 
     // gruntfile
-    if (this.isConfigTrue('gruntfile')) {
+    if (S.isConfigTrue('gruntfile')) {
       rootCopy('Gruntfile.js');
     }
 

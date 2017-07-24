@@ -1,4 +1,5 @@
 var Generator = require('../generator-stui5.base'),
+S = require('../scb-helper'),
 R = require('ramda');
 
 module.exports = class extends Generator {
@@ -34,7 +35,7 @@ module.exports = class extends Generator {
   writing() {
 
     var
-    sFragmentPath = this.jPath(this.options.webappRoot, 'fragment', this.jName(this.options.fragmentName, 'fragment.xml'));
+    sFragmentPath = S.jPath(this.options.webappRoot, 'fragment', S.jName(this.options.fragmentName, 'fragment.xml'));
 
     this.copyFT('Template.fragment.xml', sFragmentPath);
   }
