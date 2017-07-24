@@ -14,6 +14,7 @@ module.exports = class extends Generator {
 			webappRoot: "webapp",
 			appType: "masterDetail",
 			baseController: true,
+			baseControllerBody: true,
 			formatter: true,
 			mockServer: true,
 			gruntfile: true,
