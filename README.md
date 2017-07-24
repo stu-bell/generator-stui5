@@ -27,11 +27,13 @@ Although you can directly call any sub-generator included in this generator, som
 |stui5  |`yo stui5 [namespace[, title]]`        | Generate a new UI5 app from scratch. Use `namespace` and `title` to avoid those questions in the prompt.
 |stui5:view  |`yo stui5:view <viewName>`   | Add a view to an existing app, where `<viewName>` gets prepended to `.view.xml` for the view name
 |stui5:config  |`yo stui5:config` | Generate a default .yo-rc.json configuration file
-|stui5:fragment <fragmentName>||
+|stui5:fragment | `yo stui5:fragment <fragmentName>` | Add a view to existing app. <fragmentName> prepended to `.fragment.xml`
 
 ## Configuration
 
 Yeoman uses a config file `.yo-rc.json` at the root directory of the project you're generating. If you find a specific configuration you like, keep a copy of the config file for use in future projects. Yeoman will generate a default config file in the current directory if it can't find one. Any mandatory parameters missing from the config file will be asked for at the command prompt when the generator is run.
+
+Rather than requiring all of the config parameters via prompts which would be a pain, the generator uses the default config parameters defined in stui5:config. If you want to change any of the config parameters from the default values before running the generator, `yo stui5:config` will generate a default `.yo-rc.json` which you can edit before running `yo stui5` in the same directory.
 
 # Extending
 
@@ -46,4 +48,4 @@ The mem-fs-editor templating is implemented using [ejs](http://ejs.co). The docu
 
 ## Adding config options
 
-Default parameters go in the defaults object in `config/index.js`. Mandatory parameters for which there is no default should have a prompt added _if the parameter isn't already available in the config file_.
+Default parameters go in the defaults object in `config/index.js`. Mandatory parameters for which there is no default should have a prompt added _if the parameter isn't already available in the config file_. Try to keep the number of prompts minimal for speed of use. If users want greater control over their config, they should use `yo stui5:config` and edit that. See the [configuration section](#configuration), above.
