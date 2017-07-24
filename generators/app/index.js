@@ -1,4 +1,5 @@
 var Generator = require('../generator-stui5.base'),
+S = require('../scb-helper'),
 R = require('ramda'),
 slugify = require('underscore.string/slugify');
 
@@ -25,6 +26,7 @@ module.exports = class extends Generator {
   // ******************************************************* //
 
   initializing(){
+
     // generate default config
     this.composeWith('stui5:config', {});
 
@@ -68,9 +70,9 @@ module.exports = class extends Generator {
     // TODO check config isn't demanding anything nonsensical
 
     // set base controller path
-    if (this.isConfigTrue('baseController')) {
+    if (S.isConfigTrue('baseController')) {
       // super controller path is the base
-      this.config.set('superControllerPath', this.jPath(this.pathify(this.config.get('appNamespace')), 'controller/Base.controller'));
+      this.config.set('superControllerPath', S.jPath(S.pathify(this.config.get('appNamespace')), 'controller/Base.controller'));
     } else {
       // super controller path is sap controller
       this.config.set('superControllerPath', "sap/ui/core/mvc/Controller");
@@ -100,7 +102,7 @@ module.exports = class extends Generator {
 
   end(){
     // git init
-    if(this.isConfigTrue('gitInit')){
+    if(S.isConfigTrue('gitInit')){
       this.composeWith(require.resolve('generator-git-init/generators/app'), {
          commit: 'Initial commit by yeoman stui5'
       });
