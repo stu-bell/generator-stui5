@@ -1,4 +1,5 @@
 var Generator = require('yeoman-generator'),
+S = require('./scb-helper'),
 R = require('ramda');
 
 module.exports = class extends Generator {
@@ -13,7 +14,7 @@ module.exports = class extends Generator {
 		this.copy = (sDestPath, sName) => {
 			this.fs.copy(
 				this.templatePath(sName),
-				this.destinationPath(this.jPath(sDestPath, sName))
+				this.destinationPath(S.jPath(sDestPath, sName))
 			);
 		};
     this.copyFT = (sFrom, sTo) => {
@@ -26,7 +27,7 @@ module.exports = class extends Generator {
 		this.tmpl = R.curry((mProps, sDestPath, sName) => {
 			this.fs.copyTpl(
 				this.templatePath(sName),
-				this.destinationPath(this.jPath(sDestPath, sName)),
+				this.destinationPath(S.jPath(sDestPath, sName)),
 				mProps
 			);
 		});

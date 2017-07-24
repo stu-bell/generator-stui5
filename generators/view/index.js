@@ -1,4 +1,5 @@
 var Generator = require('../generator-stui5.base'),
+S = require('../scb-helper'),
 R = require('ramda');
 
 module.exports = class extends Generator {
@@ -39,8 +40,8 @@ module.exports = class extends Generator {
 	writing() {
 
 		var
-    sViewPath = this.jPath(this.options.webappRoot, 'view', this.jName(this.options.viewName, 'view.xml')),
-    sControllerPath = this.jPath(this.options.webappRoot, 'controller', this.jName(this.options.controllerName, 'controller.js')),
+    sViewPath = S.jPath(this.options.webappRoot, 'view', S.jName(this.options.viewName, 'view.xml')),
+    sControllerPath = S.jPath(this.options.webappRoot, 'controller', S.jName(this.options.controllerName, 'controller.js')),
     pickConfig = this.flipPick(this.config.getAll()),
     pickOptions = this.flipPick(this.options),
 		mProps = R.mergeAll([pickConfig(['appNamespace', 'superControllerPath']), pickOptions(["controllerName", "viewName"])]);

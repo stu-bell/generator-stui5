@@ -1,4 +1,5 @@
 var Generator = require('../generator-stui5.base'),
+S = require('../scb-helper'),
 R = require('ramda');
 
 module.exports = class extends Generator {
@@ -19,22 +20,22 @@ module.exports = class extends Generator {
 		webappTmpl('Component.js');
 
 		// i18n
-		propsTmpl(this.jPath(sRootPath, "i18n"), 'messageBundle.properties');
+		propsTmpl(S.jPath(sRootPath, "i18n"), 'messageBundle.properties');
 
 		// base controller
 		if (this.isConfigTrue('baseController')) {
 			this.log('baseController true')
-			propsTmpl(this.jPath(sRootPath, "controller"), 'Base.controller.js');
+			propsTmpl(S.jPath(sRootPath, "controller"), 'Base.controller.js');
 		}
 
 		// formatter
 		if (this.isConfigTrue('formatter')) {
-			this.copy(this.jPath(sRootPath, 'util'), 'formatter.js');
+			this.copy(S.jPath(sRootPath, 'util'), 'formatter.js');
 		}
 
 		// mock server
 		if (this.isConfigTrue('mockServer')) {
-			this.copy(this.jPath(sRootPath, 'util'), 'MockServer.js');
+			this.copy(S.jPath(sRootPath, 'util'), 'MockServer.js');
 		}
 
 
