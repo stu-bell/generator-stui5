@@ -28,12 +28,6 @@ var SCB = {
 	*/
 	flipPick: R.flip(R.pick),
 	/**
-	 * check if value of a config key is equal to a query value
-	 * @see isConfig
-	 * @memberof scb-helper
-	 */
-	configEq: R.curry((mConfig, value, sKey) => (R.propEq(sKey, value, mConfig))),
-	/**
 	 * assess whether a config parameter is equal to a query value
 	 * @see isConfigTrue
 	 * @memberof scb-helper
