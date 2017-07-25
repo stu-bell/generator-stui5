@@ -9,12 +9,7 @@ module.exports = class extends Generator {
 	// ******************************************************* //
 
 	writing() {
-    var rootCopy = sName => {
-      this.fs.copy(
-        this.templatePath(sName),
-        this.destinationPath(sName)
-      )
-    };
+    var rootCopy = this.copy('.');
 
     // copy project files
 

@@ -9,22 +9,22 @@ module.exports = class extends Generator {
 	// ******************************************************* //
 
 	writing() {
-		var pickConfig = S.flipPick(this.config.getAll()),
+		var
 		aPropNames = ['bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'rootViewName', 'baseControllerBody'],
-		propsTmpl = this.tmpl(pickConfig(aPropNames)),
+		mConfig = R.pick(aPropNames, this.config.getAll()),
 		sRootPath = this.config.get('webappRoot'),
-		webappTmpl = propsTmpl(sRootPath);
+		template = this.tmpl(mConfig);
 
 		// copy core webapp files
-		webappTmpl('index.html');
-		webappTmpl('Component.js');
+		template(sRootPath, 'index.html');
+		template(sRootPath, 'Component.js');
 
 		// i18n
-		propsTmpl(S.jPath(sRootPath, "i18n"), 'messageBundle.properties');
+		template(S.jPath(sRootPath, "i18n"), 'messageBundle.properties');
 
 		// base controller
 		if (S.isConfigTrue('baseController')) {
-			propsTmpl(S.jPath(sRootPath, "controller"), 'Base.controller.js');
+			template(S.jPath(sRootPath, "controller"), 'Base.controller.js');
 		}
 
 		// formatter
