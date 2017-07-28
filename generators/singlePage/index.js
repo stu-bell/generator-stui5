@@ -14,8 +14,7 @@ module.exports = class extends Generator {
 		mProps = S.flipPick(this.config.getAll(), aPropNames),
 		sRootPath = this.config.get('webappRoot');
 
-		// copy core webapp files
-		this.tmpl(mProps, sRootPath, 'manifest.json');
+		// TODO add routes to manifest.json
 
 		// copy Rootview
 		this.tmpl(mProps, S.jPath(sRootPath, 'view'), 'Root.view.xml')

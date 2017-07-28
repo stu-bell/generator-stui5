@@ -10,7 +10,7 @@ module.exports = class extends Generator {
 
 	writing() {
 		var
-		aPropNames = ['bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'rootViewName', 'baseControllerBody'],
+		aPropNames = ['bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'rootViewName', 'baseControllerBody', 'firstViewName'],
 		mConfig = R.pick(aPropNames, this.config.getAll()),
 		sRootPath = this.config.get('webappRoot'),
 		template = this.tmpl(mConfig);
@@ -18,6 +18,7 @@ module.exports = class extends Generator {
 		// copy core webapp files
 		template(sRootPath, 'index.html');
 		template(sRootPath, 'Component.js');
+		template(sRootPath, 'manifest.json');
 
 		// i18n
 		template(S.jPath(sRootPath, "i18n"), 'messageBundle.properties');
