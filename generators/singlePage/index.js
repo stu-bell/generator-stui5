@@ -12,9 +12,19 @@ module.exports = class extends Generator {
 		var
 		aPropNames = ['bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'firstViewName'],
 		mProps = S.flipPick(this.config.getAll(), aPropNames),
-		sRootPath = this.config.get('webappRoot');
+		sRootPath = this.config.get('webappRoot'),
+		sManifestPath = this.destinationPath(S.jPath(sRootPath, 'manifest.json')),
 
 		// TODO add routes to manifest.json
+		oManifest = this.fs.readJSON(sManifestPath);
+		oManifest['sap.ui5'].routing.routes.push({
+          "pattern": "",
+          "name": "Initial",
+          "target": [
+            "Initial"
+          ]
+        });
+		this.fs.writeJSON(sManifestPath, oManifest);
 
 		// copy Rootview
 		this.tmpl(mProps, S.jPath(sRootPath, 'view'), 'Root.view.xml')
