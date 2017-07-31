@@ -9,14 +9,72 @@ module.exports = class extends Generator {
 	// ******************************************************* //
 
 	writing() {
-		var
+		var aRoutes = [
+			{
+				pattern: "",
+				name: "master",
+				target: [
+					"blank",
+					"master"
+				]
+			},
+			{
+				pattern: "{item}",
+				name: "detail",
+				target: [
+					"detail",
+					"master"
+				]
+			},
+			{
+				pattern: "{item}/notFound",
+				name: "notFound",
+				target: [
+					"notFound",
+					"master"
+				]
+			}
+		],
+		mTargets = {
+			master: {
+				viewName: "Master",
+				viewLevel: 1,
+				viewId: "master",
+				controlAggregation: "masterPages"
+			},
+			blank: {
+				viewName: "Blank",
+				viewId: "blank",
+				viewLevel: 2,
+				controlAggregation: "detailPages"
+			},
+			notFound: {
+				viewName: "NotFound",
+				viewId: "blank",
+				viewLevel: 2,
+				controlAggregation: "detailPages"
+			},
+			detail: {
+				viewName: "Detail",
+				viewId: "detail",
+				viewLevel: 2,
+				controlAggregation: "detailPages"
+			}
+		},
 		aPropNames = ['bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'firstViewName'],
 		mProps = S.flipPick(this.config.getAll(), aPropNames),
 		aViews = ['Master', 'Detail', 'Blank', 'NotFound'],
-		sRootPath = this.config.get('webappRoot');
+		sRootPath = this.config.get('webappRoot'),
+		sManifestPath = this.destinationPath(S.jPath(sRootPath, 'manifest.json')),
 
-		// copy core webapp files
-		this.tmpl(mProps, sRootPath, 'manifest.json');
+		// add routes and targets to manifest.json
+		oManifest = this.fs.readJSON(sManifestPath),
+		aRoutesPath = ['sap.ui5', 'routing', 'routes'];
+		// add routes
+		oManifest = R.assocPath(aRoutesPath, R.concat(R.path(aRoutesPath, oManifest), aRoutes), oManifest);
+		// add targets
+		R.merge(mTargets, oManifest['sap.ui5'].routing.targets);
+		this.fs.writeJSON(sManifestPath, oManifest);
 
 		// copy Rootview
 		this.tmpl(mProps, S.jPath(sRootPath, 'view'), 'Root.view.xml')
