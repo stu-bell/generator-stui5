@@ -66,7 +66,7 @@ module.exports = class extends Generator {
 		aViews = ['Master', 'Detail', 'Blank', 'NotFound'],
 		sRootPath = this.config.get('webappRoot'),
 		sManifestPath = this.destinationPath(S.jPath(sRootPath, 'manifest.json')),
-		// TODO: pointfree this
+		// TODO: tidy this all up with evolve instead
 		// add routes and targets to manifest.json
 		oManifest = this.fs.readJSON(sManifestPath),
 		// add routes
