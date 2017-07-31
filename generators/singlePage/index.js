@@ -16,7 +16,7 @@ module.exports = class extends Generator {
 		sManifestPath = this.destinationPath(S.jPath(sRootPath, 'manifest.json')),
 
 		// add routes and targets to manifest.json
-		// TODO: ramda this
+		// TODO: ramda this - see masterDetail/index.js
 		oManifest = this.fs.readJSON(sManifestPath);
 		oManifest['sap.ui5'].routing.routes.push({
           pattern: "",
