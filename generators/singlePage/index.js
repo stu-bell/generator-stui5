@@ -15,15 +15,20 @@ module.exports = class extends Generator {
 		sRootPath = this.config.get('webappRoot'),
 		sManifestPath = this.destinationPath(S.jPath(sRootPath, 'manifest.json')),
 
-		// TODO add routes to manifest.json
+		// add routes and targets to manifest.json
+		// TODO: ramda this
 		oManifest = this.fs.readJSON(sManifestPath);
 		oManifest['sap.ui5'].routing.routes.push({
-          "pattern": "",
-          "name": "Initial",
-          "target": [
+          pattern: "",
+          name: "Initial",
+          target: [
             "Initial"
           ]
         });
+		oManifest['sap.ui5'].routing.targets['Initial'] = {
+          viewName: this.config.get('firstViewName'),
+          viewLevel: 1
+        };
 		this.fs.writeJSON(sManifestPath, oManifest);
 
 		// copy Rootview
