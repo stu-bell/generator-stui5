@@ -73,7 +73,8 @@ module.exports = class extends Generator {
 		// add routes
 		oManifest = R.assocPath(aRoutesPath, R.concat(R.path(aRoutesPath, oManifest), aRoutes), oManifest);
 		// add targets
-		R.merge(mTargets, oManifest['sap.ui5'].routing.targets);
+		var aTargetsPath = ['sap.ui5', 'routing', 'targets'];
+		oManifest = R.assocPath(aTargetsPath, R.merge(mTargets, R.path(aTargetsPath, oManifest)), oManifest);
 		this.fs.writeJSON(sManifestPath, oManifest);
 
 		// copy Rootview
