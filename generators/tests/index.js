@@ -23,16 +23,16 @@ module.exports = class extends Generator {
   writing() {
     
     var pickConfig = S.flipPick(this.config.getAll()),
-		    aPropNames = ['bootstrap', 'appTitle', 'appNamespace',
+        aPropNames = ['bootstrap', 'appTitle', 'appNamespace',
                       'superControllerPath', 'rootViewName'],
-		    propsTmpl = this.tmpl(pickConfig(aPropNames)),
+        propsTmpl = this.tmpl(pickConfig(aPropNames)),
         sRootPath = this.config.get('webappRoot'),
         sFormatterNamespace = S.jPath(this.config.get('appNamespace'),
                                       'util/formatter'),
         oConfig = this.config.getAll();
 
-		propsTmpl(S.jPath(sRootPath, 'test/unit'), 'unitTests.qunit.html');
-		propsTmpl(S.jPath(sRootPath, 'test/unit'), 'allTests.js');
+    propsTmpl(S.jPath(sRootPath, 'test/unit'), 'unitTests.qunit.html');
+    propsTmpl(S.jPath(sRootPath, 'test/unit'), 'allTests.js');
     sFormatterNamespace = S.pathify(sFormatterNamespace);
     this.tmpl(Object.assign(oConfig, {formatterNamespace: sFormatterNamespace}),
               S.jPath(sRootPath, 'test/unit/util'),
