@@ -22,11 +22,6 @@ var SCB = {
 	 * @memberof scb-helper
 	 */
 	jName: R.unapply(R.join('.')),
-	/**
-	* flip of R.pick so that the data comes first
-	* @memberof scb-helper
-	*/
-	flipPick: R.flip(R.pick),
 };
 
 module.exports = SCB;
