@@ -67,6 +67,11 @@ module.exports = class extends Generator {
   }
 
   configuring() {
+    // testing config helper TODO: remove this block
+    this.log('all: ', JSON.stringify(this.cfg())); // This works
+    this.log('single: ', this.cfg('appType')); // this works
+    this.log('multi: ', JSON.stringify(this.cfg('appType', 'webappRoot'))); // this works
+
     // TODO check config isn't demanding anything nonsensical
 
     // set base controller path
