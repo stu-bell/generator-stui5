@@ -19,7 +19,7 @@ module.exports = class extends Generator {
       required: false
     });
     this.argument('appType', {
-      desc: 'masterDetail or singlePage',
+      desc: 'master-detail or single-page',
       required: false
     });
 
@@ -62,11 +62,11 @@ module.exports = class extends Generator {
         type: 'list',
         name: 'appType',
         choices: [
-          {name: 'Master-Detail', value: 'masterDetail'},
-          {name: 'Single-Page', value: 'singlePage'}
+          {name: 'master-detail', value: 'master-detail'},
+          {name: 'single-page', value: 'single-page'}
         ],
         message: 'What template type do you want to use?',
-        default: 'singlePage'
+        default: 'single-page'
       }
     ],
     // prompt with only those required and those which should always be prompted
@@ -106,7 +106,7 @@ module.exports = class extends Generator {
     this.composeWith('stui5:core');
 
     // floor plan
-    if (this.cfg('appType') === 'masterDetail') {
+    if (this.cfg('appType') === 'master-detail') {
       this.composeWith('stui5:masterDetail');
     } else {
       // TODO: cater for other appTypes?
