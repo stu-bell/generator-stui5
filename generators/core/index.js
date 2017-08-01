@@ -10,9 +10,8 @@ module.exports = class extends Generator {
 
 	writing() {
 		var
-		aPropNames = ['bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'rootViewName', 'baseControllerBody', 'firstViewName'],
-		mConfig = R.pick(aPropNames, this.config.getAll()),
-		sRootPath = this.config.get('webappRoot'),
+		mConfig = this.cfg('bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'rootViewName', 'baseControllerBody', 'firstViewName'),
+		sRootPath = this.cfg('webappRoot'),
 		template = this.tmpl(mConfig);
 
 		// copy core webapp files

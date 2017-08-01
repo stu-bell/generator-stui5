@@ -61,10 +61,9 @@ module.exports = class extends Generator {
 				controlAggregation: "detailPages"
 			}
 		},
-		aPropNames = ['bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'firstViewName'],
-		mProps = S.flipPick(this.config.getAll(), aPropNames),
+		mProps = this.cfg('bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'firstViewName'),
 		aViews = ['Master', 'Detail', 'Blank', 'NotFound'],
-		sRootPath = this.config.get('webappRoot'),
+		sRootPath = this.cfg('webappRoot'),
 		sManifestPath = this.destinationPath(S.jPath(sRootPath, 'manifest.json')),
 		// add routes and targets to manifest.json
 		oManifest = this.fs.readJSON(sManifestPath),
