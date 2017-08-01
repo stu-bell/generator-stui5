@@ -1,5 +1,5 @@
 var Generator = require('../generator-stui5.base'),
-    S = require('../scb-helper');
+S = require('../scb-helper');
 
 module.exports = class extends Generator {
 
@@ -9,35 +9,23 @@ module.exports = class extends Generator {
 
   constructor(args, opts) {
     // call super constructor
-    super(args, opts);    
+    super(args, opts);
   }
 
   // ********************************************************* //
   // run loop: http://yeoman.io/authoring/running-context.html
   // ******************************************************* //
 
-  prompting(){
-    // 
-  }
-
   writing() {
-    
-    var pickConfig = S.flipPick(this.config.getAll()),
-        aPropNames = ['bootstrap', 'appTitle', 'appNamespace',
-                      'superControllerPath', 'rootViewName'],
-        propsTmpl = this.tmpl(pickConfig(aPropNames)),
-        sRootPath = this.config.get('webappRoot'),
-        sFormatterNamespace = S.jPath(this.config.get('appNamespace'),
-                                      'util/formatter'),
-        oConfig = this.config.getAll();
 
-    propsTmpl(S.jPath(sRootPath, 'test/unit'), 'unitTests.qunit.html');
-    propsTmpl(S.jPath(sRootPath, 'test/unit'), 'allTests.js');
-    sFormatterNamespace = S.pathify(sFormatterNamespace);
-    this.tmpl(Object.assign(oConfig, {formatterNamespace: sFormatterNamespace}),
-              S.jPath(sRootPath, 'test/unit/util'),
-              'formatter.js');
+    var mProps = this.cfg('bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'rootViewName'),
+    sFormatterNamespace = S.pathify(S.jPath(this.config.get('appNamespace'), 'util/formatter')),
+    mProps2 = R.assoc('formatterNamespace', sFormatterNamespace, mProps)
+    template = this.tmpl(mProps2),
+    sUnitPath = S.jPath(this.cfg('webappRoot'), 'test/unit');
+
+    template(sUnitPath, 'unitTests.qunit.html');
+    template(sUnitPath, 'allTests.js');
+    template(S.jPath(sUnitPath, 'util'), 'formatter.js');
   }
-
-
 };
