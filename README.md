@@ -17,7 +17,7 @@ People have written thousands of yeoman generators, and not just for JavaScript 
 These instructions assume you've installed yo via npm and are running it from the command line.
 
 ## Prompts
-For prompts which offer a list (eg 'Single-Page', 'Master-Detail'), if the arrow keys do not work to change selection, type the name displayed in the list.
+For prompts which offer a list (eg 'Single-Page', 'Master-Detail'), move the cursor onto the line with the selection and press enter.
 
 ## Commands
 
