@@ -1,4 +1,5 @@
 var Generator = require('../generator-stui5.base'),
+R = require('ramda'),
 S = require('../scb-helper');
 
 module.exports = class extends Generator {
@@ -20,7 +21,7 @@ module.exports = class extends Generator {
 
     var mProps = this.cfg('bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'rootViewName'),
     sFormatterNamespace = S.pathify(S.jPath(this.config.get('appNamespace'), 'util/formatter')),
-    mProps2 = R.assoc('formatterNamespace', sFormatterNamespace, mProps)
+    mProps2 = R.assoc('formatterNamespace', sFormatterNamespace, mProps),
     template = this.tmpl(mProps2),
     sUnitPath = S.jPath(this.cfg('webappRoot'), 'test/unit');
 
