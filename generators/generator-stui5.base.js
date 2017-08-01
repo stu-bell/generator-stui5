@@ -19,17 +19,32 @@ module.exports = class extends Generator {
     var lenEq = i => R.pipe(R.length, R.equals(i));
 
     /**
-     * wrapper on this.config.get and this.config.getAll
-     * @param zero paramters => this.config.getAll()
-     * @param one paramerter => this.config.get(param)
-     * @param multiple parameters => object similar to returned by getAll but with just properties specified
-     * @memberof stui5-generator-base
-     */
+    * wrapper on this.config.get and this.config.getAll
+    * @param zero paramters => this.config.getAll()
+    * @param one paramerter => this.config.get(param)
+    * @param multiple parameters => object similar to returned by getAll but with just properties specified
+    * @memberof stui5-generator-base
+    */
     this.cfg =  R.unapply(R.cond([
       [lenEq(1), sKey => this.config.get(sKey)],
       [lenEq(0), R.always(this.config.getAll())],
       [R.T, R.flip(R.pick)(this.config.getAll())]
-    ]))
+    ]));
+
+    /**
+    * assess whether a config parameter is equal to a query value
+    * @see isConfigTrue
+    * @memberof stui5-generator-base
+    */
+    this.isConfig = R.curry((value, sKey) => R.equals(value, this.cfg(sKey)));
+
+    /**
+    * Check if a config parameters is true
+    * @param {sting} sKey key of the config pair to check
+    * @see isConfig
+    * @memberof stui5-generator-base
+    */
+    this.isConfigTrue = this.isConfig(true);
 
     /**
     * Wrapper to fs.copy: Copy relative to this.templatePath and this.destinationPath

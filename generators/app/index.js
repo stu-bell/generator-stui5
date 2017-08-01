@@ -70,7 +70,7 @@ module.exports = class extends Generator {
     // TODO check config isn't demanding anything nonsensical
 
     // set base controller path
-    if (S.isConfigTrue('baseController')) {
+    if (this.isConfigTrue('baseController')) {
       // super controller path is the base
       this.config.set('superControllerPath', S.jPath(S.pathify(this.cfg('appNamespace')), 'controller/Base.controller'));
     } else {
@@ -107,7 +107,7 @@ module.exports = class extends Generator {
 
   end(){
     // git init
-    if(S.isConfigTrue('gitInit')){
+    if(this.isConfigTrue('gitInit')){
       this.composeWith(require.resolve('generator-git-init/generators/app'), {
          commit: 'Initial commit by yeoman stui5'
       });
