@@ -18,6 +18,7 @@ module.exports = class extends Generator {
       description: 'What\'s your app title?',
       required: false
     });
+    
 
   }
 
@@ -53,6 +54,16 @@ module.exports = class extends Generator {
         name: 'appTitle',
         message: 'What\'s your app title?',
         default: this.appname //default to current folder name
+      },
+      {
+        type: 'list',
+        name: 'appType',
+        choices: [
+          {name: 'Master-Detail', value: 'masterDetail'},
+          {name: 'Single-Page', value: 'singlePage'}
+        ],
+        message: 'What template type do you want to use?',
+        default: 'singlePage'
       }
     ],
     // prompt with only those required and those which should always be prompted
@@ -63,6 +74,9 @@ module.exports = class extends Generator {
 
       // start by saving all responses to config.
       this.config.set(responses);
+
+      // TODO remove this test
+      this.log('appType: ', this.cfg('appType'));
     });
   }
 

@@ -16,6 +16,9 @@ People have written thousands of yeoman generators, and not just for JavaScript 
 # Usage
 These instructions assume you've installed yo via npm and are running it from the command line.
 
+## Prompts
+For prompts which offer a list (eg 'Single-Page', 'Master-Detail'), if the arrow keys do not work to change selection, type the name displayed in the list.
+
 ## Commands
 
 Generator help: `yo stui5 --help` or `yo stui5:subgen --help` where `subgen` is one of the subgenerators available.
