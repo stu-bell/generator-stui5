@@ -18,6 +18,7 @@ module.exports = class extends Generator {
 			formatter: true,
 			mockServer: true,
 			gruntfile: true,
+			qunit: true,
 			packageJson: true,
 			ci: true,
 			gitInit: true,
