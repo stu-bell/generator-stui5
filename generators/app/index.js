@@ -11,14 +11,17 @@ module.exports = class extends Generator {
 
     // register additional arguments
     this.argument('appNamespace', {
-      description: 'What\'s your project namespace?' ,
+      desc: 'What\'s your project namespace?' ,
       required: false
     });
     this.argument('appTitle', {
-      description: 'What\'s your app title?',
+      desc: 'What\'s your app title?',
       required: false
     });
-    
+    this.argument('appType', {
+      desc: 'masterDetail or singlePage',
+      required: false
+    });
 
   }
 
@@ -31,8 +34,8 @@ module.exports = class extends Generator {
     // generate default config
     this.composeWith('stui5:config', {});
 
-    // save arguments passed
-    this.config.set(R.pick(['appNamespace', 'appTitle'], this.options));
+    // save arguments and options passed
+    this.config.set(R.pick(['appNamespace', 'appTitle', 'appType'], this.options));
   }
 
   prompting() {
@@ -75,8 +78,6 @@ module.exports = class extends Generator {
       // start by saving all responses to config.
       this.config.set(responses);
 
-      // TODO remove this test
-      this.log('appType: ', this.cfg('appType'));
     });
   }
 
