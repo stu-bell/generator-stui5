@@ -43,7 +43,7 @@ module.exports = class extends Generator {
     sViewPath = S.jPath(this.options.webappRoot, 'view', S.jName(this.options.viewName, 'view.xml')),
     sControllerPath = S.jPath(this.options.webappRoot, 'controller', S.jName(this.options.controllerName, 'controller.js')),
 		mProps = R.mergeAll([
-      R.pick(['appNamespace', 'superControllerPath'], this.cfg()),
+      this.cfg('appNamespace', 'superControllerPath'),
       R.pick(["controllerName", "viewName"], this.options)
     ]);
 
