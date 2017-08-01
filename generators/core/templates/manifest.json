@@ -53,21 +53,8 @@
         "controlId": "app",
         "controlAggregation": "pages"
       },
-      "routes": [
-        {
-          "pattern": "",
-          "name": "Initial",
-          "target": [
-            "Initial"
-          ]
-        }
-      ],
-      "targets": {
-        "Initial": {
-          "viewName": "<%= firstViewName %>",
-          "viewLevel": 1
-        }
-      }
+      "routes": [],
+      "targets": {}
     }
   },
   "sap.platform.hcp": {

@@ -27,20 +27,6 @@ var SCB = {
 	* @memberof scb-helper
 	*/
 	flipPick: R.flip(R.pick),
-	/**
-	 * assess whether a config parameter is equal to a query value
-	 * @see isConfigTrue
-	 * @memberof scb-helper
-	 */
-	isConfig: R.curry((value, sKey, mConfig) => R.equals(value, R.prop(sKey, mConfig))),
 };
-/**
- * Check if a config parameters is true
- * @param {sting} sKey key of the config pair to check
- * @param {map} mConfig map of config pairs
- * @see isConfig
- * @memberof scb-helper
- */
-SCB.isConfigTrue = SCB.isConfig(true);
 
 module.exports = SCB;

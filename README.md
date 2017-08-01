@@ -24,19 +24,28 @@ Although you can directly call any sub-generator included in this generator, som
 
 |Generator:subGenerator  |Command  |Description  
 |--|--|--|
-|stui5  |`yo stui5`        | Generate a new UI5 app from scratch
+|stui5  |`yo stui5 [namespace[, title]]`        | Generate a new UI5 app from scratch. Use `namespace` and `title` to avoid those questions in the prompt.
 |stui5:view  |`yo stui5:view <viewName>`   | Add a view to an existing app, where `<viewName>` gets prepended to `.view.xml` for the view name
 |stui5:config  |`yo stui5:config` | Generate a default .yo-rc.json configuration file
-|stui5:fragment <fragmentName>|
+|stui5:fragment | `yo stui5:fragment <fragmentName>` | Add a view to existing app. <fragmentName> prepended to `.fragment.xml`
 
 ## Configuration
 
 Yeoman uses a config file `.yo-rc.json` at the root directory of the project you're generating. If you find a specific configuration you like, keep a copy of the config file for use in future projects. Yeoman will generate a default config file in the current directory if it can't find one. Any mandatory parameters missing from the config file will be asked for at the command prompt when the generator is run.
 
+Rather than requiring all of the config parameters via prompts which would be a pain, the generator uses the default config parameters defined in stui5:config. If you want to change any of the config parameters from the default values before running the generator, `yo stui5:config` will generate a default `.yo-rc.json` which you can edit before running `yo stui5` in the same directory.
+
 # Extending
 
-Writing a yeoan generator is pretty straight forward.  There's a good tutorial at [yeoman.io](http://yeoman.io/authoring/). You can either write your own generator or enhance this one (open a merge request on GitLab). Keep in mind that generators can and should be composable.
+Writing a yeoman generator is pretty straight forward.  There's a good tutorial at [yeoman.io](http://yeoman.io/authoring/). You can either write your own generator or enhance this one (open a merge request on GitLab). Keep in mind that generators can and should be composable.
+
+Base class and helper class. Yeoman generators inherit from `yeoman-generator` however some of the genereators in this project inherit from `generator-stui5.base` which provide a couple of helper wrappers. There's also a bundle of static helper methods in `scb-helper`.
+
+## Files and templates
+Working with the filesystem is implemented using [mem-fs-editor](https://github.com/sboudrias/mem-fs-editor) which is accessible in the yeoman generator as `this.fs`.
+
+The mem-fs-editor templating is implemented using [ejs](http://ejs.co). The documentation is pretty concise but the best way to get used to it is to just look at some of the examples here. Search for `<%` in files to see example use of placeholders. The Base.controller template in stui5:core uses the ejs _includes_ and _scripting_ concepts.
 
 ## Adding config options
 
-Default parameters go in the defaults object in `config/index.js`. Mandatory parameters for which there is no default should have a prompt added _if the parameter isn't already available in the config file_.
+Default parameters go in the defaults object in `config/index.js`. Mandatory parameters for which there is no default should have a prompt added _if the parameter isn't already available in the config file_. Try to keep the number of prompts minimal for speed of use. If users want greater control over their config, they should use `yo stui5:config` and edit that. See the [configuration section](#configuration), above.

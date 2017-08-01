@@ -9,37 +9,32 @@ module.exports = class extends Generator {
 	// ******************************************************* //
 
 	writing() {
-    var rootCopy = sName => {
-      this.fs.copy(
-        this.templatePath(sName),
-        this.destinationPath(sName)
-      )
-    };
+    var rootCopy = this.copy('.');
 
     // copy project files
 
 		// package.json
-		if (S.isConfigTrue('packageJson')) {
+		if (this.isConfigTrue('packageJson')) {
 			rootCopy('package.json')
 		}
 
     // eslint
-    if(S.isConfigTrue('eslint')){
+    if(this.isConfigTrue('eslint')){
       rootCopy('.eslintrc');
     }
 
     // gitignore
-    if (S.isConfigTrue('gitInit')) {
+    if (this.isConfigTrue('gitInit')) {
       rootCopy('.gitignore');
     }
 
     // ci
-    if (S.isConfigTrue('ci')) {
+    if (this.isConfigTrue('ci')) {
       rootCopy('.gitlab-ci.yml');
     }
 
     // gruntfile
-    if (S.isConfigTrue('gruntfile')) {
+    if (this.isConfigTrue('gruntfile')) {
       rootCopy('Gruntfile.js');
     }
 

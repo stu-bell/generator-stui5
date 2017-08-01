@@ -9,32 +9,31 @@ module.exports = class extends Generator {
 	// ******************************************************* //
 
 	writing() {
-		var pickConfig = S.flipPick(this.config.getAll()),
-		aPropNames = ['bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'rootViewName'],
-		propsTmpl = this.tmpl(pickConfig(aPropNames)),
-		sRootPath = this.config.get('webappRoot'),
-		webappTmpl = propsTmpl(sRootPath);
+		var
+		mConfig = this.cfg('bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'rootViewName', 'baseControllerBody', 'firstViewName'),
+		sRootPath = this.cfg('webappRoot'),
+		template = this.tmpl(mConfig);
 
 		// copy core webapp files
-		webappTmpl('index.html');
-		webappTmpl('Component.js');
+		template(sRootPath, 'index.html');
+		template(sRootPath, 'Component.js');
+		template(sRootPath, 'manifest.json');
 
 		// i18n
-		propsTmpl(S.jPath(sRootPath, "i18n"), 'messageBundle.properties');
+		template(S.jPath(sRootPath, "i18n"), 'messageBundle.properties');
 
 		// base controller
-		if (S.isConfigTrue('baseController')) {
-			this.log('baseController true')
-			propsTmpl(S.jPath(sRootPath, "controller"), 'Base.controller.js');
+		if (this.isConfigTrue('baseController')) {
+			template(S.jPath(sRootPath, "controller"), 'Base.controller.js');
 		}
 
 		// formatter
-		if (S.isConfigTrue('formatter')) {
+		if (this.isConfigTrue('formatter')) {
 			this.copy(S.jPath(sRootPath, 'util'), 'formatter.js');
 		}
 
 		// mock server
-		if (S.isConfigTrue('mockServer')) {
+		if (this.isConfigTrue('mockServer')) {
 			this.copy(S.jPath(sRootPath, 'util'), 'MockServer.js');
 		}
 

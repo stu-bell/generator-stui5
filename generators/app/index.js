@@ -37,7 +37,7 @@ module.exports = class extends Generator {
   prompting() {
 
     // check if a config key has a value
-    var isConfigNil = sKey => R.isNil(this.config.get(sKey));
+    var isConfigNil = sKey => R.isNil(this.cfg(sKey));
     // check if a prompt is required (not required if the prompt is already in config)
     var isPromptReq = R.pipe(R.prop('name'), isConfigNil);
 
@@ -70,9 +70,9 @@ module.exports = class extends Generator {
     // TODO check config isn't demanding anything nonsensical
 
     // set base controller path
-    if (S.isConfigTrue('baseController')) {
+    if (this.isConfigTrue('baseController')) {
       // super controller path is the base
-      this.config.set('superControllerPath', S.jPath(S.pathify(this.config.get('appNamespace')), 'controller/Base.controller'));
+      this.config.set('superControllerPath', S.jPath(S.pathify(this.cfg('appNamespace')), 'controller/Base.controller'));
     } else {
       // super controller path is sap controller
       this.config.set('superControllerPath', "sap/ui/core/mvc/Controller");
@@ -82,7 +82,7 @@ module.exports = class extends Generator {
   writing() {
 
     // README
-    this.tmpl({appTitle: this.config.get('appTitle')}, '.', 'README.md');
+    this.tmpl({appTitle: this.cfg('appTitle')}, '.', 'README.md');
 
     // project root templates
     this.composeWith('stui5:projectfiles');
@@ -91,18 +91,23 @@ module.exports = class extends Generator {
     this.composeWith('stui5:core');
 
     // floor plan
-    if (this.config.get('appType') === 'masterDetail') {
+    if (this.cfg('appType') === 'masterDetail') {
       this.composeWith('stui5:masterDetail');
     } else {
       // TODO: cater for other appTypes?
       this.composeWith('stui5:singlePage');
     }
 
+    // tests
+    if(this.cfg('qunit') === true) {
+      this.composeWith('stui5:tests');
+    }
+
   }
 
   end(){
     // git init
-    if(S.isConfigTrue('gitInit')){
+    if(this.isConfigTrue('gitInit')){
       this.composeWith(require.resolve('generator-git-init/generators/app'), {
          commit: 'Initial commit by yeoman stui5'
       });

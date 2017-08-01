@@ -1,6 +1,6 @@
 var Generator = require('../generator-stui5.base'),
-S = require('../scb-helper'),
-R = require('ramda');
+	S = require('../scb-helper'),
+	R = require('ramda');
 
 module.exports = class extends Generator {
 
@@ -10,19 +10,43 @@ module.exports = class extends Generator {
 
 	writing() {
 		var
-		aPropNames = ['bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'firstViewName'],
-		mProps = S.flipPick(this.config.getAll(), aPropNames),
-		sRootPath = this.config.get('webappRoot');
+			mProps = this.cfg('bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'firstViewName'),
+			sRootPath = this.cfg('webappRoot'),
+			sManifestPath = this.destinationPath(S.jPath(sRootPath, 'manifest.json')),
 
-		// copy core webapp files
-		this.tmpl(mProps, sRootPath, 'manifest.json');
+			// add routes and targets to manifest.json
+			oManifest = this.fs.readJSON(sManifestPath),
+			aRoutes = [{
+				pattern: "",
+				name: "Initial",
+				target: [
+					"Initial"
+				]
+			}],
+			mTargets = {
+				"Initial": {
+					viewName: this.cfg('firstViewName'),
+					viewLevel: 1
+				}
+			},
+		// merge routes and targets
+		oManifestUpdated = R.evolve({
+			"sap.ui5": {
+				routing: {
+					routes: R.concat(aRoutes),
+					targets: R.merge(mTargets)
+				}
+			}
+		}, oManifest);
+		// write back
+		this.fs.writeJSON(sManifestPath, oManifestUpdated);
 
 		// copy Rootview
 		this.tmpl(mProps, S.jPath(sRootPath, 'view'), 'Root.view.xml')
 
 		// first view and controller via stui5:view
 		this.composeWith('stui5:view', {
-			arguments: [this.config.get('firstViewName')]
+			arguments: [this.cfg('firstViewName')]
 		});
 
 	}

@@ -19,7 +19,7 @@ module.exports = class extends Generator {
     });
     this.argument('webappRoot', {
       description: 'Path to the root folder of webapp',
-      default: this.config.get('webappRoot')
+      default: this.cfg('webappRoot')
     });
 
   }
