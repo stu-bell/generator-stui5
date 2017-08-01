@@ -66,17 +66,19 @@ module.exports = class extends Generator {
 		aViews = ['Master', 'Detail', 'Blank', 'NotFound'],
 		sRootPath = this.config.get('webappRoot'),
 		sManifestPath = this.destinationPath(S.jPath(sRootPath, 'manifest.json')),
-		// TODO: tidy this all up with evolve instead
 		// add routes and targets to manifest.json
 		oManifest = this.fs.readJSON(sManifestPath),
-		// add routes
-		aRoutesPath = ['sap.ui5', 'routing', 'routes'],
-		oManifestRoutes = R.assocPath(aRoutesPath, R.concat(R.path(aRoutesPath, oManifest), aRoutes), oManifest),
-		// add targets
-		aTargetsPath = ['sap.ui5', 'routing', 'targets'],
-		oManifestTargets = R.assocPath(aTargetsPath, R.merge(mTargets, R.path(aTargetsPath, oManifestRoutes)), oManifestRoutes);
+		// merge routes and targets
+		oManifestUpdated = R.evolve({
+			"sap.ui5": {
+				routing: {
+					routes: R.concat(aRoutes),
+					targets: R.merge(mTargets)
+				}
+			}
+		}, oManifest);
 		// write manifest back
-		this.fs.writeJSON(sManifestPath, oManifestTargets);
+		this.fs.writeJSON(sManifestPath, oManifestUpdated);
 
 		// copy Rootview
 		this.tmpl(mProps, S.jPath(sRootPath, 'view'), 'Root.view.xml')

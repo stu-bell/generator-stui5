@@ -29,8 +29,9 @@ module.exports = class extends Generator {
 					viewName: this.config.get('firstViewName'),
 					viewLevel: 1
 				}
-			};
-		oManifest = R.evolve({
+			},
+		// merge routes and targets
+		oManifestUpdated = R.evolve({
 			"sap.ui5": {
 				routing: {
 					routes: R.concat(aRoutes),
@@ -38,8 +39,8 @@ module.exports = class extends Generator {
 				}
 			}
 		}, oManifest);
-
-		this.fs.writeJSON(sManifestPath, oManifest);
+		// write back
+		this.fs.writeJSON(sManifestPath, oManifestUpdated);
 
 		// copy Rootview
 		this.tmpl(mProps, S.jPath(sRootPath, 'view'), 'Root.view.xml')
