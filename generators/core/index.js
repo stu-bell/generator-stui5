@@ -23,17 +23,17 @@ module.exports = class extends Generator {
 		template(S.jPath(sRootPath, "i18n"), 'messageBundle.properties');
 
 		// base controller
-		if (S.isConfigTrue('baseController')) {
+		if (this.isConfigTrue('baseController')) {
 			template(S.jPath(sRootPath, "controller"), 'Base.controller.js');
 		}
 
 		// formatter
-		if (S.isConfigTrue('formatter')) {
+		if (this.isConfigTrue('formatter')) {
 			this.copy(S.jPath(sRootPath, 'util'), 'formatter.js');
 		}
 
 		// mock server
-		if (S.isConfigTrue('mockServer')) {
+		if (this.isConfigTrue('mockServer')) {
 			this.copy(S.jPath(sRootPath, 'util'), 'MockServer.js');
 		}
 
