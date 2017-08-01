@@ -10,9 +10,8 @@ module.exports = class extends Generator {
 
 	writing() {
 		var
-			aPropNames = ['bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'firstViewName'],
-			mProps = S.flipPick(this.config.getAll(), aPropNames),
-			sRootPath = this.config.get('webappRoot'),
+			mProps = this.cfg('bootstrap', 'appTitle', 'appNamespace', 'superControllerPath', 'firstViewName'),
+			sRootPath = this.cfg('webappRoot'),
 			sManifestPath = this.destinationPath(S.jPath(sRootPath, 'manifest.json')),
 
 			// add routes and targets to manifest.json
@@ -26,7 +25,7 @@ module.exports = class extends Generator {
 			}],
 			mTargets = {
 				"Initial": {
-					viewName: this.config.get('firstViewName'),
+					viewName: this.cfg('firstViewName'),
 					viewLevel: 1
 				}
 			},
@@ -47,7 +46,7 @@ module.exports = class extends Generator {
 
 		// first view and controller via stui5:view
 		this.composeWith('stui5:view', {
-			arguments: [this.config.get('firstViewName')]
+			arguments: [this.cfg('firstViewName')]
 		});
 
 	}

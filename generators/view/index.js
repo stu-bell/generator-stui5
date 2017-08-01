@@ -24,7 +24,7 @@ module.exports = class extends Generator {
 		});
     this.argument('webappRoot', {
       description: 'Path to the root folder of webapp',
-      default: this.config.get('webappRoot')
+      default: this.cfg('webappRoot')
     });
 
   }
@@ -43,7 +43,7 @@ module.exports = class extends Generator {
     sViewPath = S.jPath(this.options.webappRoot, 'view', S.jName(this.options.viewName, 'view.xml')),
     sControllerPath = S.jPath(this.options.webappRoot, 'controller', S.jName(this.options.controllerName, 'controller.js')),
 		mProps = R.mergeAll([
-      R.pick(['appNamespace', 'superControllerPath'], this.config.getAll()),
+      R.pick(['appNamespace', 'superControllerPath'], this.cfg()),
       R.pick(["controllerName", "viewName"], this.options)
     ]);
 
