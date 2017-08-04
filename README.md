@@ -16,6 +16,14 @@ People have written thousands of yeoman generators, and not just for JavaScript 
 # Usage
 These instructions assume you've installed yo via npm and are running it from the command line.
 
+## Quick start
+1. Create a new directory for your project and `cd` into it
+2. If you'd like to change the default config, run `yo stui5:config` then edit the resulting `.yo-rc.json` file. If you're happy with the default settings, skip this step
+3. Generate the app with `yo stui5`
+
+Later you can add views with `yo stui5:view <viewName>` and fragments with `yo stui5:fragment <fragName>`.
+
+
 ## Prompts
 For prompts which offer a list (eg 'Single-Page', 'Master-Detail'), move the cursor onto the line with the selection and press enter.
 
