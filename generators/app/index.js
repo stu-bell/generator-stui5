@@ -1,7 +1,6 @@
 var Generator = require('../generator-stui5.base'),
 S = require('../scb-helper'),
-R = require('ramda'),
-slugify = require('underscore.string/slugify');
+R = require('ramda');
 
 module.exports = class extends Generator {
 
@@ -49,14 +48,14 @@ module.exports = class extends Generator {
       {
         type: 'input',
         name: 'appNamespace',
-        default: slugify(this.appname),
+        default: S.dotify(this.appname),
         message: 'What\'s your project namespace?'
       },
       {
         type: 'input',
         name: 'appTitle',
         message: 'What\'s your app title?',
-        default: this.appname //default to current folder name
+        default: S.spacefy(this.appname) //default to current folder name
       },
       {
         type: 'list',
