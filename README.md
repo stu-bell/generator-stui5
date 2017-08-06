@@ -35,17 +35,20 @@ Although you can directly call any sub-generator included in this generator, som
 
 |Generator:subGenerator  |Command, options  |Description  
 |--|--|--|--|
-|stui5  |`yo stui5 [namespace[, title]]`        | Generate a new UI5 app from scratch. Use `namespace` and `title` to avoid those questions in the prompt.|
-|stui5:view  |`yo stui5:view <viewName>`   | Add a view to an existing app, where `<viewName>` gets prepended to `.view.xml` for the view name|
 |stui5:config  |`yo stui5:config` | Generate a default .yo-rc.json configuration file|
-|stui5:fragment | `yo stui5:fragment <fragmentName>` | Add a view to existing app. <fragmentName> prepended to `.fragment.xml`|
+|stui5  |`yo stui5 [namespace[, title]]`        | Generate a new UI5 app from scratch. Use `namespace` and `title` to avoid those questions in the prompt.|
+|stui5:view  |`yo stui5:view <viewName> [, controllerName[, webappRoot]]`   | Add a view to an existing app, where `<viewName>` gets prepended to `.view.xml` for the view name|
+|stui5:fragment | `yo stui5:fragment <fragmentName>[, webappRoot]` | Add a view to existing app. <fragmentName> prepended to `.fragment.xml`|
 |stui5:projectfiles|`yo stui5:projectfiles`| Adds non-webapp files, such as package.json, Gruntfile.js, .eslintrc etc|
-|stui5:tests|`yo stui5:tests`| Adds unit test templates. 
+|stui5:tests|`yo stui5:tests`| Adds unit test templates.|
 
 
 ## Configuration
 
 Yeoman uses a config file `.yo-rc.json` at the root directory of the project you're generating. If you find a specific configuration you like, keep a copy of the config file for use in future projects. Yeoman will generate a default config file in the current directory if it can't find one. Any mandatory parameters missing from the config file will be asked for at the command prompt when the generator is run.
+
+See comments in `generators/config/index.js` for brief description of config options.
+// TODO: document config options
 
 Rather than requiring all of the config parameters via prompts which would be a pain, the generator uses the default config parameters defined in stui5:config. If you want to change any of the config parameters from the default values before running the generator, `yo stui5:config` will generate a default `.yo-rc.json` which you can edit before running `yo stui5` in the same directory.
 
