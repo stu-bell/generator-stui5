@@ -123,10 +123,12 @@ module.exports = class extends Generator {
     // git init
     if(this.isConfigTrue('gitInit')){
       this.composeWith(require.resolve('generator-git-init/generators/app'), {
-         commit: 'Initial commit by yeoman stui5'
+        commit: 'Initial commit by yeoman stui5'
       });
       this.log('Git repository initialised');
     }
+
+    this.log('ACTION REQUIRED: Update README.md');
   }
 
 };
