@@ -81,7 +81,7 @@ module.exports = class extends Generator {
   }
 
   configuring() {
-    // TODO check config isn't demanding anything nonsensical
+    // TODO check config dependencies: eg if CI is true but gruntfile is false, the ci stuff dependcheck config dependencies: eg if CI is true but gruntfile is false, the ci stuff depends on gruntfile so gruntfile should be set to true. if gruntfile is true, package.json option should be true. etc
 
     // set base controller path
     if (this.isConfigTrue('baseController')) {
