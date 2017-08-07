@@ -4,18 +4,17 @@ S = require('../scb-helper');
 
 module.exports = class extends Generator {
 
-  // ******************************************************* //
-  // constructor
-  // ******************************************************* //
-
-  constructor(args, opts) {
-    // call super constructor
-    super(args, opts);
-  }
-
   // ********************************************************* //
   // run loop: http://yeoman.io/authoring/running-context.html
   // ******************************************************* //
+  initializing(){
+
+    // generate default config
+    this.composeWith('stui5:config', {});
+
+    // save arguments and options passed
+    // this.config.set(R.pick(['webappRoot'], this.options));
+  }
 
   writing() {
 

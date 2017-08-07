@@ -1,7 +1,6 @@
 var Generator = require('../generator-stui5.base'),
 S = require('../scb-helper'),
-R = require('ramda'),
-slugify = require('underscore.string/slugify');
+R = require('ramda');
 
 module.exports = class extends Generator {
 
@@ -11,11 +10,15 @@ module.exports = class extends Generator {
 
     // register additional arguments
     this.argument('appNamespace', {
-      description: 'What\'s your project namespace?' ,
+      desc: 'What\'s your project namespace?' ,
       required: false
     });
     this.argument('appTitle', {
-      description: 'What\'s your app title?',
+      desc: 'What\'s your app title?',
+      required: false
+    });
+    this.argument('appType', {
+      desc: 'master-detail or single-page',
       required: false
     });
 
@@ -30,8 +33,8 @@ module.exports = class extends Generator {
     // generate default config
     this.composeWith('stui5:config', {});
 
-    // save arguments passed
-    this.config.set(R.pick(['appNamespace', 'appTitle'], this.options));
+    // save arguments and options passed
+    this.config.set(R.pick(['appNamespace', 'appTitle', 'appType'], this.options));
   }
 
   prompting() {
@@ -45,14 +48,24 @@ module.exports = class extends Generator {
       {
         type: 'input',
         name: 'appNamespace',
-        default: slugify(this.appname),
+        default: S.dotify(this.appname),
         message: 'What\'s your project namespace?'
       },
       {
         type: 'input',
         name: 'appTitle',
         message: 'What\'s your app title?',
-        default: this.appname //default to current folder name
+        default: S.spacefy(this.appname) //default to current folder name
+      },
+      {
+        type: 'list',
+        name: 'appType',
+        choices: [
+          {name: 'master-detail', value: 'master-detail'},
+          {name: 'single-page', value: 'single-page'}
+        ],
+        message: 'What template type do you want to use?',
+        default: 'single-page'
       }
     ],
     // prompt with only those required and those which should always be prompted
@@ -63,11 +76,12 @@ module.exports = class extends Generator {
 
       // start by saving all responses to config.
       this.config.set(responses);
+
     });
   }
 
   configuring() {
-    // TODO check config isn't demanding anything nonsensical
+    // TODO check config dependencies: eg if CI is true but gruntfile is false, the ci stuff dependcheck config dependencies: eg if CI is true but gruntfile is false, the ci stuff depends on gruntfile so gruntfile should be set to true. if gruntfile is true, package.json option should be true. etc
 
     // set base controller path
     if (this.isConfigTrue('baseController')) {
@@ -91,7 +105,7 @@ module.exports = class extends Generator {
     this.composeWith('stui5:core');
 
     // floor plan
-    if (this.cfg('appType') === 'masterDetail') {
+    if (this.cfg('appType') === 'master-detail') {
       this.composeWith('stui5:masterDetail');
     } else {
       // TODO: cater for other appTypes?
@@ -109,10 +123,12 @@ module.exports = class extends Generator {
     // git init
     if(this.isConfigTrue('gitInit')){
       this.composeWith(require.resolve('generator-git-init/generators/app'), {
-         commit: 'Initial commit by yeoman stui5'
+        commit: 'Initial commit by yeoman stui5'
       });
       this.log('Git repository initialised');
     }
+
+    this.log('ACTION REQUIRED: Update README.md');
   }
 
 };

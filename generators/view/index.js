@@ -33,6 +33,15 @@ module.exports = class extends Generator {
 	// run loop: http://yeoman.io/authoring/running-context.html
 	// ******************************************************* //
 
+  initializing(){
+
+    // generate default config
+    this.composeWith('stui5:config', {});
+
+    // save arguments and options passed
+    // this.config.set(R.pick(['webappRoot'], this.options));
+  }
+
 	prompting(){
 		// TODO: prompt for any missing options not passed through options - although not actually needed becuase it'll complain if you don't supply required arguments
 	}
