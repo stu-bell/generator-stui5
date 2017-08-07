@@ -1,3 +1,19 @@
+<!-- TOC START min:1 max:3 link:true update:true -->
+- [Super template for UI5](#super-template-for-ui5)
+  - [UI5 Yeoman Generator](#ui5-yeoman-generator)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Quick start](#quick-start)
+  - [Prompts](#prompts)
+  - [Commands](#commands)
+  - [Configuration](#configuration)
+- [Extending](#extending)
+  - [Files and templates](#files-and-templates)
+  - [Adding config options](#adding-config-options)
+- [TODO](#todo)
+
+<!-- TOC END -->
+
 # Super template for UI5
 
 Video demo: [MUD show-n-tell](https://www.youtube.com/watch?v=5RFkG-jEETI&list=PLfctWmgNyOIedb1RLMXyD87Q5Ch_Soub-&index=14)
