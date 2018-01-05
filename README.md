@@ -18,10 +18,12 @@
 
 Generates boilerplate for new UI5 projects.
 
+See [MUD show-n-tell](https://www.youtube.com/watch?v=5RFkG-jEETI) for an overview.
+
 ## UI5 Yeoman Generator
 [Yeoman](http://yeoman.io) is a [Node.js](http://nodejs.org) package for generating code projects from pre-defined templates known as _generators_. This project is a generator for starting [UI5](http://openui5.org) projects.
 
-People have written thousands of yeoman generators, and not just for JavaScript projects. You may find an existing one that suits your needs. See the full list at [yeoman.io](http://yeoman.io/generators/). There are a few UI5 generators (search UI5 in the search field) but none of them were to my taste, hence this one. Also, feel free to fork this and add your own enhancements, or make pull requests. See the section below on extending this generator. 
+People have written thousands of yeoman generators, and not just for JavaScript projects. You may find an existing one that suits your needs. See the full list at [yeoman.io](http://yeoman.io/generators/). There are a few UI5 generators (search UI5 in the search field) but none of them were to my taste, hence this one. Also, feel free to fork this and add your own enhancements, or make pull requests. See the section below on extending this generator.
 
 # Installation
 
