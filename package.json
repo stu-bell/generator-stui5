@@ -1,11 +1,11 @@
 {
   "name": "generator-stui5",
   "version": "0.1.0",
-  "description": "UI5 generator for me to learn about yeoman.",
+  "description": "UI5 boilerplate generator with Yeoman.io",
   "files": [
     "generators"
   ],
-  "keywords": ["yeoman-generator", "UI5"],
+  "keywords": ["yeoman-generator", "UI5", "boilerplate", "template"],
   "dependencies": {
     "yeoman-generator": "^1.0.0",
     "ramda": "^0.24.1",

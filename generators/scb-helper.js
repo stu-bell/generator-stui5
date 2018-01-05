@@ -7,18 +7,20 @@ var R = require('ramda');
 var SCB = {
 	/**
 	 * convert separtors to spaces
+	 * Separators defined by the replace pattern, include / - and .
 	 * @param {string}
 	 * @memberof scb-helper
 	 */
 	spacefy: R.replace(/\/|\-|\./g, ' '),
 	/**
-	 * convert slashes to dots
+	 * convert separtors to dots
+	 * Separators defined by the replace pattern, include / and -
 	 * @param {string}
 	 * @memberof scb-helper
 	 */
 	dotify: R.replace(/\/|\-/g, '.'),
 	/**
-	 * convert dots to slashes for file paths
+	 * convert dots or dashes to slashes for file paths
 	 * @param {string}
 	 * @memberof scb-helper
 	 */

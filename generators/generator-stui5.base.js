@@ -32,7 +32,11 @@ module.exports = class extends Generator {
     ]));
 
     /**
-    * assess whether a config parameter is equal to a query value
+    * assess whether a config parameter is equal to a query value.
+    * For example: this.isConfig(false, 'gitInit') // returns true if gitInit is false
+    * @param value The query value used in the comparison
+    * @param sKey The key of the config parameter to assess
+    * @returns {boolean}
     * @see isConfigTrue
     * @memberof stui5-generator-base
     */
@@ -47,7 +51,7 @@ module.exports = class extends Generator {
     this.isConfigTrue = this.isConfig(true);
 
     /**
-    * Wrapper to fs.copy: Copy relative to this.templatePath and this.destinationPath
+    * Wrapper to fs.copy, copying relative to the default template and destination paths
     * @param    {string} sFrom path to file copy. Path relative to this.templatePath()
     * @param    {string} sTo path to paste file. Path relative to this.destinationPath()
     * @see yeoman-generator: fs.copy
@@ -77,8 +81,8 @@ module.exports = class extends Generator {
     });
 
     /**
-    * Wrapper to this.copyFT: assumes file sName is at this.templatePath() and will copied to sDestPath, relative to this.destinationPath, without changing the filename.
-    * @param {string} sDestPath Path to paste file (excluding filename) relative to this.destinationPath()
+    * Wrapper to this.copyFT keeping the template name. Assumes file sName is at this.templatePath() and will be copied to sDestPath, relative to this.destinationPath, without changing the filename.
+    * @param {string} sDestPath destination path for the file (excluding filename) relative to this.destinationPath()
     * @param {string} sName Name of the file at this.templatePath(). Will be used to name the destination file
     * @memberof stui5-generator-base
     * @see this.copyFT
@@ -88,7 +92,7 @@ module.exports = class extends Generator {
     });
 
     /**
-    * Wrapper to this.tmplFT: assumes file sName is at this.templatePath() and will copied to sDestPath, relative to this.destinationPath, without changing the filename.
+    * Wrapper to this.tmplFT keeping the template name. Assumes file sName is at this.templatePath() and will copied to sDestPath, relative to this.destinationPath, without changing the filename.
     * @param {map} mProps map of placholder keys and values. Values will replace corresponding template placeholders
     * @param {string} sDestPath Path to paste file (excluding filename) relative to this.destinationPath()
     * @param {string} sName Name of the file at this.templatePath(). Will be used to name the destination file

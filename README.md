@@ -8,6 +8,10 @@
   - [Commands](#commands)
   - [Configuration](#configuration)
 - [Extending](#extending)
+  - [Yeoman](#yeoman)
+  - [Sub-generators](#sub-generators)
+  - [Base class and helper class](#base-class-and-helper-class)
+  - [Ramda](#ramda)
   - [Files and templates](#files-and-templates)
   - [Adding config options](#adding-config-options)
 
@@ -84,9 +88,27 @@ Rather than requiring all of the config parameters via prompts, the generator us
 
 # Extending
 
-Writing a yeoman generator is pretty straight forward.  There's a good tutorial at [yeoman.io](http://yeoman.io/authoring/). You can either write your own generator or enhance this one (fork your own or open a merge request on GitLab).
+## Yeoman
+Writing a yeoman generator is pretty straight forward. There's a good tutorial at [yeoman.io](http://yeoman.io/authoring/). You can either write your own generator or enhance this one (fork your own or open a pull request).
 
-Base class and helper class: Yeoman generators inherit from `yeoman-generator` however some of the generators in this project inherit from `generator-stui5.base` which provide a couple of helper wrappers. There's also a bundle of static helper methods in `scb-helper`.
+In the index.js files of each sub-generator are methods called in sequence by Yeoman. This sequence is called the [run loop](http://yeoman.io/authoring/running-context.html) and is worth familiarising yourself with if you plan on tinkering with the generator. The run loop methods are:
+- initializing
+- prompting
+- configuring
+- default
+- writing
+- conflicts
+- install
+- end
+
+## Sub-generators
+The default sub-generator to be run (when `yo stui5` is called) is the app generator, defined in `/generators/app/index.js`. When a sub-generator is called explicitly, the corresponding index file is used (for example `/generators/view/index.js` in the case of `yo stui5:view`). Sub-generators call other sub-generators via the `composeWith` method. For example, several sub-generators call the config sub-generator via `composeWith('stui5:config')`.
+
+## Base class and helper class
+Yeoman generators inherit from `yeoman-generator` however some of the generators in this project inherit from `generator-stui5.base` which provide a couple of helper wrappers. There's also a bundle of static helper methods in `scb-helper`.
+
+## Ramda
+This project uses Ramda. If you're unfamiliar with Ramda, checkout some of the introductions at [ramdajs.com](http://ramdajs.com/).
 
 ## Files and templates
 Working with the filesystem is implemented using [mem-fs-editor](https://github.com/sboudrias/mem-fs-editor) which is accessible in the yeoman generator as `this.fs`.
