@@ -80,11 +80,23 @@ Although you can directly call any sub-generator included in this generator, som
 
 Yeoman uses a config file `.yo-rc.json` at the root directory of the project you're generating. If you find a specific configuration you like, keep a copy of the config file for use in future projects. Yeoman will generate a default config file in the current directory if it can't find one. Any mandatory parameters missing from the config file will be asked for at the command prompt when the generator is run.
 
-See comments in `generators/config/index.js` for brief description of config options.
-
-// TODO: document config options
-
 Rather than requiring all of the config parameters via prompts, the generator uses the default config parameters defined in stui5:config. If you want to change any of the config parameters from the default values before running the main generator, `yo stui5:config` will generate a default `.yo-rc.json` which you can edit before running `yo stui5` in the same directory.
+
+| Config key | Default value | Description
+|---|---|---
+| bootstrap	| '../../resources/sap-ui-core.js'	| path to resource roots in index.html
+| firstViewName	| "Initial"	| the name of the first view to generate
+| webappRoot	| "webapp"	| path that will contain UI5 app files and folders, such as index.html, Component.js, view, controller etc
+| baseController	| true	| include a base controller?
+| baseControllerBody	| true	| include some commonly used helper functions in base controller?
+| formatter	| true	| include util/formatter.js?
+| mockServer	| false	| include a mockserver?
+| gruntfile	| false	| include a Gruntfile?
+| qunit	| false	| include unit test template?
+| packageJson	| false	| include package.json?
+| ci	| false	| include .gitlab-ci.yml?
+| gitInit	| true	| initialise a git repository?
+| eslint	| true | include .eslintrc?
 
 # Extending
 

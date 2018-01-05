@@ -12,14 +12,14 @@ module.exports = class extends Generator {
 			bootstrap: '../../resources/sap-ui-core.js', // path to resource roots in index.html
 			firstViewName: "Initial", // the name of the first view to generate
 			webappRoot: "webapp", // path that will contain UI5 app files and folders, such as index.html, Component.js, view, controller etc
-			baseController: true, // Include a base controller?
-			baseControllerBody: true, // Include some commonly used functions in base controller?
+			baseController: true, // include a base controller?
+			baseControllerBody: true, // include some commonly used helper functions in base controller?
 			formatter: true, // include util/formatter.js?
-			mockServer: true, // include a mockserver?
-			gruntfile: true, // include a Gruntfile?
-			qunit: true, // include unit test template?
-			packageJson: true, // include package.json?
-			ci: true, // include .gitlab-ci.yml?
+			mockServer: false, // include a mockserver?
+			gruntfile: false, // include a Gruntfile?
+			qunit: false, // include unit test template?
+			packageJson: false, // include package.json?
+			ci: false, // include .gitlab-ci.yml?
 			gitInit: true, // initialise a git repository?
 			eslint: true // include .eslintrc?
 		});
