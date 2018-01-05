@@ -32,6 +32,7 @@ module.exports = class extends Generator {
 
     // generate default config
     this.composeWith('stui5:config', {});
+		this.log('To edit full config, run `yo stui5:config` and edit .yo-rc.json ')
 
     // save arguments and options passed
     this.config.set(R.pick(['appNamespace', 'appTitle', 'appType'], this.options));

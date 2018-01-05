@@ -1,5 +1,5 @@
 <!-- TOC START min:1 max:3 link:true update:true -->
-- [Super template for UI5](#super-template-for-ui5)
+- [Super Template for UI5](#super-template-for-ui5)
   - [UI5 Yeoman Generator](#ui5-yeoman-generator)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -14,14 +14,14 @@
 
 <!-- TOC END -->
 
-# Super template for UI5
+# Super Template for UI5
 
-Video demo: [MUD show-n-tell](https://www.youtube.com/watch?v=5RFkG-jEETI&list=PLfctWmgNyOIedb1RLMXyD87Q5Ch_Soub-&index=14)
+Generates boilerplate for new UI5 projects.
 
 ## UI5 Yeoman Generator
 [Yeoman](http://yeoman.io) is a [Node.js](http://nodejs.org) package for generating code projects from pre-defined templates known as _generators_. This project is a generator for starting [UI5](http://openui5.org) projects.
 
-People have written thousands of yeoman generators, and not just for JavaScript projects. You may find an existing one that suits your needs. See the full list at [yeoman.io](http://yeoman.io/generators/). There are a few UI5 generators (search UI5 in the search field) but none of them were to my taste, hence this one.
+People have written thousands of yeoman generators, and not just for JavaScript projects. You may find an existing one that suits your needs. See the full list at [yeoman.io](http://yeoman.io/generators/). There are a few UI5 generators (search UI5 in the search field) but none of them were to my taste, hence this one. Also, feel free to fork this and add your own enhancements, or make pull requests. See the section below on extending this generator. 
 
 # Installation
 
@@ -86,7 +86,7 @@ Rather than requiring all of the config parameters via prompts which would be a 
 
 Writing a yeoman generator is pretty straight forward.  There's a good tutorial at [yeoman.io](http://yeoman.io/authoring/). You can either write your own generator or enhance this one (open a merge request on GitLab). Keep in mind that generators can and should be composable.
 
-Base class and helper class. Yeoman generators inherit from `yeoman-generator` however some of the genereators in this project inherit from `generator-stui5.base` which provide a couple of helper wrappers. There's also a bundle of static helper methods in `scb-helper`.
+Base class and helper class. Yeoman generators inherit from `yeoman-generator` however some of the generators in this project inherit from `generator-stui5.base` which provide a couple of helper wrappers. There's also a bundle of static helper methods in `scb-helper`.
 
 ## Files and templates
 Working with the filesystem is implemented using [mem-fs-editor](https://github.com/sboudrias/mem-fs-editor) which is accessible in the yeoman generator as `this.fs`.
