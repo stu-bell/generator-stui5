@@ -124,3 +124,8 @@ The mem-fs-editor templating is implemented using [ejs](http://ejs.co). The docu
 ## Adding config options
 
 Default parameters go in the defaults object in `config/index.js`. Mandatory parameters for which there is no default should have a prompt added, if the parameter isn't already available in the config file. Try to keep the number of prompts minimal for speed of use. If users want greater control over their config, they should use `yo stui5:config` and edit that. See the [configuration section](#configuration), above.
+
+# Contributors:
+Oli Rogers, Bluefin Solutions (Gruntfile and continuous integration templates)
+Tiago Almeida, Bluefin Solutions (Unit test templates)
+Stuart Bell, Bluefin Solutions
