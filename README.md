@@ -10,15 +10,12 @@
 - [Extending](#extending)
   - [Files and templates](#files-and-templates)
   - [Adding config options](#adding-config-options)
-- [TODO](#todo)
 
 <!-- TOC END -->
 
 # Super Template for UI5
 
 Generates boilerplate for new UI5 projects.
-
-See [MUD show-n-tell](https://www.youtube.com/watch?v=5RFkG-jEETI) for an overview.
 
 ## UI5 Yeoman Generator
 [Yeoman](http://yeoman.io) is a [Node.js](http://nodejs.org) package for generating code projects from pre-defined templates known as _generators_. This project is a generator for starting [UI5](http://openui5.org) projects.
@@ -29,7 +26,7 @@ People have written thousands of yeoman generators, and not just for JavaScript 
 
 1. Install node from [nodejs.org](https://nodejs.org/en/download/)
 - Install yeoman via npm: `npm install -g yo`
-- Install this generator: while this project is not an npm package, clone it to a local directory, from which run: `npm link`
+- Install this generator: `npm install -g generator-stui5`
 
 # Usage
 These instructions assume you've installed yo via npm and are running it from the command line.
@@ -63,7 +60,7 @@ For prompts which offer a list (eg 'Single-Page', 'Master-Detail'), move the cur
 
 Generator help: `yo stui5 --help` or `yo stui5:subgen --help` where `subgen` is one of the subgenerators available.
 
-Although you can directly call any sub-generator included in this generator, some of them depend on config that gets set using the top-level app generator.
+Although you can directly call any sub-generator included in this generator, some of them depend on config that is created by the top-level app generator.
 
 |Generator:subGenerator  |Command, options  |Description  
 |--|--|--|--|
@@ -80,15 +77,16 @@ Although you can directly call any sub-generator included in this generator, som
 Yeoman uses a config file `.yo-rc.json` at the root directory of the project you're generating. If you find a specific configuration you like, keep a copy of the config file for use in future projects. Yeoman will generate a default config file in the current directory if it can't find one. Any mandatory parameters missing from the config file will be asked for at the command prompt when the generator is run.
 
 See comments in `generators/config/index.js` for brief description of config options.
+
 // TODO: document config options
 
-Rather than requiring all of the config parameters via prompts which would be a pain, the generator uses the default config parameters defined in stui5:config. If you want to change any of the config parameters from the default values before running the generator, `yo stui5:config` will generate a default `.yo-rc.json` which you can edit before running `yo stui5` in the same directory.
+Rather than requiring all of the config parameters via prompts, the generator uses the default config parameters defined in stui5:config. If you want to change any of the config parameters from the default values before running the main generator, `yo stui5:config` will generate a default `.yo-rc.json` which you can edit before running `yo stui5` in the same directory.
 
 # Extending
 
-Writing a yeoman generator is pretty straight forward.  There's a good tutorial at [yeoman.io](http://yeoman.io/authoring/). You can either write your own generator or enhance this one (open a merge request on GitLab). Keep in mind that generators can and should be composable.
+Writing a yeoman generator is pretty straight forward.  There's a good tutorial at [yeoman.io](http://yeoman.io/authoring/). You can either write your own generator or enhance this one (fork your own or open a merge request on GitLab).
 
-Base class and helper class. Yeoman generators inherit from `yeoman-generator` however some of the generators in this project inherit from `generator-stui5.base` which provide a couple of helper wrappers. There's also a bundle of static helper methods in `scb-helper`.
+Base class and helper class: Yeoman generators inherit from `yeoman-generator` however some of the generators in this project inherit from `generator-stui5.base` which provide a couple of helper wrappers. There's also a bundle of static helper methods in `scb-helper`.
 
 ## Files and templates
 Working with the filesystem is implemented using [mem-fs-editor](https://github.com/sboudrias/mem-fs-editor) which is accessible in the yeoman generator as `this.fs`.
@@ -97,9 +95,4 @@ The mem-fs-editor templating is implemented using [ejs](http://ejs.co). The docu
 
 ## Adding config options
 
-Default parameters go in the defaults object in `config/index.js`. Mandatory parameters for which there is no default should have a prompt added _if the parameter isn't already available in the config file_. Try to keep the number of prompts minimal for speed of use. If users want greater control over their config, they should use `yo stui5:config` and edit that. See the [configuration section](#configuration), above.
-
-# TODO
-Places tasks might be listed:
-- TODO/FIXME tags throughout source code
-- [Repository issues on GitLab](https://git.bluefinsolutions.com/sbell/yeoman-stui5/issues)
+Default parameters go in the defaults object in `config/index.js`. Mandatory parameters for which there is no default should have a prompt added, if the parameter isn't already available in the config file. Try to keep the number of prompts minimal for speed of use. If users want greater control over their config, they should use `yo stui5:config` and edit that. See the [configuration section](#configuration), above.
