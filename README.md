@@ -72,8 +72,6 @@ Although you can directly call any sub-generator included in this generator, som
 |stui5  |`yo stui5 [namespace[, title]]`        | Generate a new UI5 app from scratch. Use `namespace` and `title` to avoid those questions in the prompt.|
 |stui5:view  |`yo stui5:view <viewName> [, controllerName[, webappRoot]]`   | Add a view to an existing app, where `<viewName>` gets prepended to `.view.xml` for the view name|
 |stui5:fragment | `yo stui5:fragment <fragmentName>[, webappRoot]` | Add a view to existing app. <fragmentName> prepended to `.fragment.xml`|
-|stui5:projectfiles|`yo stui5:projectfiles`| Adds non-webapp files, such as package.json, Gruntfile.js, .eslintrc etc|
-|stui5:tests|`yo stui5:tests`| Adds unit test templates.|
 
 
 ## Configuration
@@ -90,11 +88,7 @@ Rather than requiring all of the config parameters via prompts, the generator us
 | baseController	| true	| include a base controller?
 | baseControllerBody	| true	| include some commonly used helper functions in base controller?
 | formatter	| true	| include util/formatter.js?
-| mockServer	| false	| include a mockserver?
-| gruntfile	| false	| include a Gruntfile?
-| qunit	| false	| include unit test template?
-| packageJson	| false	| include package.json?
-| ci	| false	| include .gitlab-ci.yml?
+| mockserver	| true	| include a mockserver.js?
 | gitInit	| true	| initialise a git repository?
 | eslint	| true | include .eslintrc?
 
