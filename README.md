@@ -1,6 +1,5 @@
 <!-- TOC START min:1 max:3 link:true update:true -->
 - [Super Template for UI5](#super-template-for-ui5)
-  - [UI5 Yeoman Generator](#ui5-yeoman-generator)
 - [Installation](#installation)
 - [Usage](#usage)
   - [Quick start](#quick-start)
@@ -22,7 +21,6 @@
 
 Generates boilerplate for new UI5 projects.
 
-## UI5 Yeoman Generator
 [Yeoman](http://yeoman.io) is a [Node.js](http://nodejs.org) package for generating code projects from pre-defined templates known as _generators_. This project is a generator for starting [UI5](http://openui5.org) projects.
 
 People have written thousands of yeoman generators, and not just for JavaScript projects. You may find an existing one that suits your needs. See the full list at [yeoman.io](http://yeoman.io/generators/). There are a few UI5 generators (search UI5 in the search field) but none of them were to my taste, hence this one. Also, feel free to fork this and add your own enhancements, or make pull requests. See the section below on extending this generator.
@@ -50,7 +48,7 @@ Later you can add views with `yo stui5:view <name>` and fragments with `yo stui5
 2. Optional: edit default config with `yo stui5:config`
 ![Screencast: Generate and edit config](docs/2.gif)
 
-3. Generate app with `yo stui5`
+3. Generate the main boilerplate with `yo stui5`
 ![Screencast: Generate app](docs/3.gif)
 
 4. Optional: add a view with `yo stui5:view <name>`
@@ -66,8 +64,8 @@ Generator argument help: `yo stui5 --help` or `yo stui5:subgen --help` where `su
 
 Although you can directly call any sub-generator included in this generator, some of them depend on config that is created by the top-level app generator.
 
-|Sub-generator  |Command, options  |Description  
-|--|--|--|--|
+|Sub-generator  |Command[, options]  |Description  |
+|--|--|--|
 |stui5:config  |`yo stui5:config` | Generate a default .yo-rc.json configuration file|
 |stui5  |`yo stui5 [namespace[, title]]`        | Generate a new UI5 app from scratch. Use `namespace` and `title` to avoid those questions in the prompt.|
 |stui5:view  |`yo stui5:view <name> [, controllerName[, webappRoot]]`   | Add a view to an existing app, where `<name>` gets prepended to `.view.xml` for the view name|
@@ -81,15 +79,15 @@ Yeoman uses a config file `.yo-rc.json` at the root directory of the project you
 Rather than requiring all of the config parameters via prompts, the generator uses the default config parameters defined in stui5:config. If you want to change any of the config parameters from the default values before running the main generator, `yo stui5:config` will generate a default `.yo-rc.json` which you can edit before running `yo stui5` in the same directory.
 
 | Config key | Default value | Description
-|---|---|---
-| bootstrap	| '../../resources/sap-ui-core.js'	| path to resource roots in index.html
-| firstViewName	| "Initial"	| the name of the first view to generate
-| webappRoot	| "webapp"	| path that will contain UI5 app files and folders, such as index.html, Component.js, view, controller etc
-| baseController	| true	| include a base controller?
-| baseControllerBody	| false	| include some commonly used helper functions in base controller?
-| formatter	| true	| include util/formatter.js?
-| mockserver	| true	| include a mockserver.js?
-| gitInit	| true	| initialise a git repository?
+|---|---|---|
+| bootstrap	| '../../resources/sap-ui-core.js'	| path to resource roots in index.html|
+| firstViewName	| "Initial"	| the name of the first view to generate|
+| webappRoot	| "webapp"	| path that will contain UI5 app files and folders, such as index.html, Component.js, view, controller etc|
+| baseController	| true	| include a base controller?|
+| baseControllerBody	| false	| include some commonly used helper functions in base controller?|
+| formatter	| true	| include util/formatter.js?|
+| mockserver	| true	| include a mockserver.js?|
+| gitInit	| true	| initialise a git repository?|
 | eslint	| true | include .eslintrc?
 
 # Extending
