@@ -112,7 +112,7 @@ In the index.js files of each sub-generator are methods called in sequence by Ye
 ## Sub-generators
 The default sub-generator to be run (when `yo stui5` is called) is the app generator, defined in `/generators/app/index.js`. When a sub-generator is called explicitly, the corresponding index file is used (for example `/generators/view/index.js` in the case of `yo stui5:view`). Sub-generators call other sub-generators via the `composeWith` method. For example, several sub-generators call the config sub-generator via `composeWith('stui5:config')`.
 
-## Base class and helper class
+## Base generator and helper class
 Yeoman generators inherit from `yeoman-generator` however some of the generators in this project inherit from `generator-stui5.base` which provide a couple of helper wrappers. There's also a bundle of static helper methods in `scb-helper`.
 
 ## Ramda
@@ -125,9 +125,9 @@ The mem-fs-editor templating is implemented using [ejs](http://ejs.co). The docu
 
 ## Adding config options
 
-Default parameters go in the defaults object in `config/index.js`. Mandatory parameters for which there is no default should have a prompt added, if the parameter isn't already available in the config file. Try to keep the number of prompts minimal for speed of use. If users want greater control over their config, they should use `yo stui5:config` and edit that. See the [configuration section](#configuration), above.
+Default parameters go in the defaults object in `config/index.js`. Mandatory parameters for which there is no default (such as namespace or title) should have a prompt and argument added, if the parameter isn't already available in the config file. Try to keep the number of prompts minimal for speed of use. If users want greater control over their config, they should use `yo stui5:config` and edit that. See the [configuration section](#configuration), above.
 
-# Contributors:
-Oli Rogers, Bluefin Solutions (Gruntfile and continuous integration templates)
-Tiago Almeida, Bluefin Solutions (Unit test templates)
-Stuart Bell, Bluefin Solutions
+# Contributors
+- Oli Rogers, Bluefin Solutions (Gruntfile and continuous integration templates)
+- Tiago Almeida, Bluefin Solutions (Unit test templates)
+- Stuart Bell, Bluefin Solutions
