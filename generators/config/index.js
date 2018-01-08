@@ -13,7 +13,7 @@ module.exports = class extends Generator {
 			firstViewName: "Initial", // the name of the first view to generate
 			webappRoot: "webapp", // path that will contain UI5 app files and folders, such as index.html, Component.js, view, controller etc
 			baseController: true, // include a base controller?
-			baseControllerBody: true, // include some commonly used helper functions in base controller?
+			baseControllerBody: false, // include some commonly used helper functions in base controller?
 			formatter: true, // include util/formatter.js?
 			mockServer: true, // include a mockserver?
 			// gruntfile: false, // include a Gruntfile?

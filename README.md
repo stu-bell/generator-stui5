@@ -42,7 +42,7 @@ Screenshots below
 2. If you'd like to change the config from default, run `yo stui5:config` then edit the resulting `.yo-rc.json` file. If you're happy with the default settings, skip this step
 3. Generate the app with `yo stui5`
 
-Later you can add views with `yo stui5:view <viewName>` and fragments with `yo stui5:fragment <fragName>`.
+Later you can add views with `yo stui5:view <name>` and fragments with `yo stui5:fragment <name>` where `<name>` is the name of the new view or fragment.
 
 1. Create a new directory for your project and `cd` into it
 ![Screencast: Create new folder](docs/1.gif)
@@ -53,7 +53,7 @@ Later you can add views with `yo stui5:view <viewName>` and fragments with `yo s
 3. Generate app with `yo stui5`
 ![Screencast: Generate app](docs/3.gif)
 
-4. Optional: add a view with `yo stui5:view <view-name>`
+4. Optional: add a view with `yo stui5:view <name>`
 ![Screencast: Add a view](docs/4.gif)
 
 
@@ -62,16 +62,16 @@ For prompts which offer a list (eg 'Single-Page', 'Master-Detail'), move the cur
 
 ## Commands
 
-Generator help: `yo stui5 --help` or `yo stui5:subgen --help` where `subgen` is one of the subgenerators available.
+Generator argument help: `yo stui5 --help` or `yo stui5:subgen --help` where `subgen` is one of the sub-generators available.
 
 Although you can directly call any sub-generator included in this generator, some of them depend on config that is created by the top-level app generator.
 
-|Generator:subGenerator  |Command, options  |Description  
+|Sub-generator  |Command, options  |Description  
 |--|--|--|--|
 |stui5:config  |`yo stui5:config` | Generate a default .yo-rc.json configuration file|
 |stui5  |`yo stui5 [namespace[, title]]`        | Generate a new UI5 app from scratch. Use `namespace` and `title` to avoid those questions in the prompt.|
-|stui5:view  |`yo stui5:view <viewName> [, controllerName[, webappRoot]]`   | Add a view to an existing app, where `<viewName>` gets prepended to `.view.xml` for the view name|
-|stui5:fragment | `yo stui5:fragment <fragmentName>[, webappRoot]` | Add a view to existing app. <fragmentName> prepended to `.fragment.xml`|
+|stui5:view  |`yo stui5:view <name> [, controllerName[, webappRoot]]`   | Add a view to an existing app, where `<name>` gets prepended to `.view.xml` for the view name|
+|stui5:fragment | `yo stui5:fragment <name>[, webappRoot]` | Add a view to existing app. <name> prepended to `.fragment.xml`|
 
 
 ## Configuration
@@ -86,7 +86,7 @@ Rather than requiring all of the config parameters via prompts, the generator us
 | firstViewName	| "Initial"	| the name of the first view to generate
 | webappRoot	| "webapp"	| path that will contain UI5 app files and folders, such as index.html, Component.js, view, controller etc
 | baseController	| true	| include a base controller?
-| baseControllerBody	| true	| include some commonly used helper functions in base controller?
+| baseControllerBody	| false	| include some commonly used helper functions in base controller?
 | formatter	| true	| include util/formatter.js?
 | mockserver	| true	| include a mockserver.js?
 | gitInit	| true	| initialise a git repository?
