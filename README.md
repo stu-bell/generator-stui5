@@ -14,6 +14,7 @@
   - [Ramda](#ramda)
   - [Files and templates](#files-and-templates)
   - [Adding config options](#adding-config-options)
+- [Contributors:](#contributors)
 
 <!-- TOC END -->
 
@@ -38,23 +39,22 @@ These instructions assume you've installed yo via npm and are running it from th
 ## Quick start
 Screenshots below
 1. Create a new directory for your project and `cd` into it
-2. If you'd like to change the default config, run `yo stui5:config` then edit the resulting `.yo-rc.json` file. If you're happy with the default settings, skip this step
+2. If you'd like to change the config from default, run `yo stui5:config` then edit the resulting `.yo-rc.json` file. If you're happy with the default settings, skip this step
 3. Generate the app with `yo stui5`
 
 Later you can add views with `yo stui5:view <viewName>` and fragments with `yo stui5:fragment <fragName>`.
 
-
 1. Create a new directory for your project and `cd` into it
-![Screencast: Create new folder](/uploads/302d7817cb6a976ddecf18bdcc11b24a/1.gif)
+![Screencast: Create new folder](docs/1.gif)
 
 2. Optional: edit default config with `yo stui5:config`
-![Screencast: Generate and edit config](/uploads/bc184179c18b373f02a7c9c4e0815972/2.gif)
+![Screencast: Generate and edit config](docs/2.gif)
 
 3. Generate app with `yo stui5`
-![Screencast: Generate app](/uploads/7381f9055d4870a568c42ea2773a35f6/3.gif)
+![Screencast: Generate app](docs/3.gif)
 
 4. Optional: add a view with `yo stui5:view <view-name>`
-![Screencast: Add a view](/uploads/ea275c5640cf9777c97c5b631f76d2a1/4.gif)
+![Screencast: Add a view](docs/4.gif)
 
 
 ## Prompts
@@ -96,6 +96,8 @@ Rather than requiring all of the config parameters via prompts, the generator us
 
 ## Yeoman
 Writing a yeoman generator is pretty straight forward. There's a good tutorial at [yeoman.io](http://yeoman.io/authoring/). You can either write your own generator or enhance this one (fork your own or open a pull request).
+
+The simplest way to modify the generator is to change the files in the templates folders. Placeholder values inside `<%` tags are swapped out with values passed in from the index.js files of the corresponding sub-generator. For example, in `view/templates/template.view.xml` is a placeholder `<%= viewName %>`, which will be replaced by whatever the value of the `viewName` property in the writing method of `view/index.js`. These values will come from arguments or config, see the yeoman.io tutorial for more details.
 
 In the index.js files of each sub-generator are methods called in sequence by Yeoman. This sequence is called the [run loop](http://yeoman.io/authoring/running-context.html) and is worth familiarising yourself with if you plan on tinkering with the generator. The run loop methods are:
 - initializing
