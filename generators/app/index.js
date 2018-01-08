@@ -113,10 +113,10 @@ module.exports = class extends Generator {
       this.composeWith('stui5:singlePage');
     }
 
-    // // tests
-    // if(this.cfg('qunit') === true) {
-    //   this.composeWith('stui5:tests');
-    // }
+    // tests
+    if(this.isConfigTrue('qunit')) {
+      this.composeWith('stui5:tests');
+    }
 
   }
 

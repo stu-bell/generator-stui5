@@ -23,10 +23,10 @@ module.exports = class extends Generator {
 
     // copy project files
 
-		// // package.json
-		// if (this.isConfigTrue('packageJson')) {
-		// 	rootCopy('package.json')
-		// }
+		// package.json
+		if (this.isConfigTrue('packageJson')) {
+			rootCopy('package.json')
+		}
 
     // eslint
     if(this.isConfigTrue('eslint')){
@@ -38,15 +38,15 @@ module.exports = class extends Generator {
       rootCopy('.gitignore');
     }
 
-    // // ci
-    // if (this.isConfigTrue('ci')) {
-    //   rootCopy('.gitlab-ci.yml');
-    // }
+    // ci
+    if (this.isConfigTrue('ci')) {
+      rootCopy('.gitlab-ci.yml');
+    }
 
-    // // gruntfile
-    // if (this.isConfigTrue('gruntfile')) {
-    //   rootCopy('Gruntfile.js');
-    // }
+    // gruntfile
+    if (this.isConfigTrue('gruntfile')) {
+      rootCopy('Gruntfile.js');
+    }
 
 	}
 
