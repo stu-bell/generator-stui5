@@ -11,5 +11,10 @@
     "ramda": "^0.24.1",
     "generator-git-init": "1.1.3",
     "underscore.string": "^3.3.4"
+  },
+  "homepage": "https://github.com/stu-b-doo/generator-stui5",
+  "author": {
+    "name": "Stuart Bell",
+    "url": "https://github.com/stu-b-doo"
   }
 }
