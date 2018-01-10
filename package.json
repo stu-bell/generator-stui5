@@ -5,7 +5,7 @@
   "files": [
     "generators"
   ],
-  "keywords": ["yeoman-generator", "UI5", "boilerplate", "template"],
+  "keywords": ["yeoman-generator", "SAP", "UI5", "boilerplate", "template"],
   "dependencies": {
     "yeoman-generator": "^1.0.0",
     "ramda": "^0.24.1",
@@ -16,5 +16,9 @@
   "author": {
     "name": "Stuart Bell",
     "url": "https://github.com/stu-b-doo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stu-b-doo/generator-stui5.git"
   }
 }
