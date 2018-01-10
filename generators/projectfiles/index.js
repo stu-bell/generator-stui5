@@ -35,7 +35,7 @@ module.exports = class extends Generator {
 
     // gitignore
     if (this.isConfigTrue('gitInit')) {
-      rootCopy('.gitignore');
+      this.copyFT('.gitignore.template', '.gitignore');
     }
 
     // ci

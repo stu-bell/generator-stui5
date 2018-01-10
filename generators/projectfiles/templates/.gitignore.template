@@ -1,0 +1,10 @@
+# Dependency directories
+node_modules
+jspm_packages
+
+## UI5
+ui5/*
+!ui5/.gitkeep
+build/*
+# Except build files (for upload)
+!build/.UI5Repository*
